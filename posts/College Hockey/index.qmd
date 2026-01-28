@@ -1,0 +1,877 @@
+---
+title: "Hockey Game Prediction"
+author: "Julian Fitz"
+date: "2026-01-28"
+categories: [sports, hockey, analysis]
+---
+
+Simple college hockey dashboard with game outcome prediction
+
+## Setup
+
+Set the variables
+
+```{r}
+#| include: false
+library(tidyverse)
+library(here)
+library(rvest)
+library(jsonlite)
+library(ggrepel)
+library(BradleyTerry2)
+library(gridExtra)
+library(readxl)
+library(reactable)
+
+source(here("Scripts/loadRanks.R"))
+```
+
+```{r}
+# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))
+# url <- "https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/"
+url <- "https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/"
+home_team <- "St. Lawrence University"
+away_team <- "Quinnipiac University"
+```
+
+```{r}
+#| include: false
+page <- read_html(url)
+
+data_page_json <- page |>
+  html_element("div#app") |>
+  html_attr("data-page")
+
+data_page <- fromJSON(data_page_json, simplifyVector = FALSE)
+
+composite <- data_page$props$content$composite
+```
+
+```{r team map}
+#| include: false
+name_key <- c(
+  "Air Force Academy",                       # afa
+  "Augustana University",                    # agu
+  "Arizona State University",                # asu
+  "Bentley University",                      # bentley
+  "Bowling Green State University",          # bgsu
+  "Brown University",                        # bn
+  "Boston University",                       # bu
+  "Boston College",                          # bc
+  "Bemidji State University",                # bsu
+  "Canisius College",                        # can
+  "Clarkson University",                     # cla
+  "Colgate University",                      # cog
+  "Colorado College",                        # cc
+  "Cornell University",                      # cor
+  "Dartmouth College",                       # dc
+  "University of Denver",                    # du
+  "Ferris State University",                 # fsu
+  "Harvard University",                      # hu
+  "College of the Holy Cross",               # hc
+  "Lindenwood University",                   # lin
+  "Long Island University",                  # liu
+  "Lake Superior State University",          # lssu
+  "Mercyhurst University",                   # mhu
+  "Michigan State University",               # mi
+  "Massachusetts Institute of Technology",   # mit
+  "Merrimack College",                       # mmc
+  "Minnesota State University, Mankato",     # mnst
+  "Miami University",                        # mu
+  "University of Notre Dame",                # nd
+  "Neumann University",                      # nea
+  "Northeastern University",                 # neo
+  "Niagara University",                      # niag
+  "Northern Michigan University",            # nmu
+  "Ohio State University",                   # osu
+  "Princeton University",                    # pri
+  "Providence College",                      # pc
+  "Pennsylvania State University",           # psu
+  "Quinnipiac University",                   # qu
+  "Rochester Institute of Technology",       # rit
+  "Robert Morris University",                # rm
+  "Rensselaer Polytechnic Institute",        # rpi
+  "St. Cloud State University",              # scsu
+  "Sacred Heart University",                 # shu
+  "St. Lawrence University",                 # slu
+  "Stonehill College",                       # stone
+  "University of St. Thomas",                # stthomas
+  "University of Alaska Anchorage",          # uaa
+  "University of Alaska Fairbanks",          # uaf
+  "Union College",                           # uc
+  "University of Massachusetts Amherst",     # uma
+  "University of Minnesota Duluth",          # umd
+  "University of Maine",                     # me
+  "University of Michigan",                  # um
+  "University of Massachusetts Lowell",      # uml
+  "University of Minnesota",                 # umn
+  "University of North Carolina",            # unc
+  "University of North Dakota",              # und
+  "University of New Hampshire",             # unh
+  "US National Team Development Program",    # usntdp
+  "University of Vermont",                   # uvm
+  "University of Wisconsin",                 # uw
+  "Western Michigan University",             # wmu
+  "Yale University",                         # yu
+  "United States Military Academy",          # army
+  "Michigan Technological University",       # mtu
+  "University of Nebraska Omaha",            # uno
+  "Simon Fraser University",                 # Simon Fraser
+  "University of Connecticut"                # uconn
+)
+
+short_names <- c(
+  "Air Force", "Augustana", "Arizona State", "Bentley", "Bowling Green",
+  "Brown", "Boston University", "Boston College", "Bemidji State",
+  "Canisius", "Clarkson", "Colgate", "Colorado College", "Cornell",
+  "Dartmouth", "Denver", "Ferris State", "Harvard", "Holy Cross",
+  "Lindenwood", "LIU", "Lake Superior", "Mercyhurst", "Michigan State",
+  "MIT", "Merrimack", "Minnesota State", "Miami", "Notre Dame",
+  "Neumann", "Northeastern", "Niagara", "Northern Michigan", "Ohio State",
+  "Princeton", "Providence", "Penn State", "Quinnipiac", "RIT",
+  "Robert Morris", "RPI", "St. Cloud State", "Sacred Heart",
+  "St. Lawrence", "Stonehill", "St. Thomas",
+  "Alaska Anchorage", "Alaska", "Union", "Massachusetts",
+  "Minnesota Duluth", "Maine", "Michigan", "UMass Lowell",
+  "Minnesota", "North Carolina", "North Dakota", "New Hampshire",
+  "USNTDP", "Vermont", "Wisconsin", "Western Michigan", "Yale",
+  "Army", "Michigan Tech", "Omaha", "Simon Fraser", "Connecticut"
+)
+
+team_codes <- c(
+  "afa","agu","asu","bentley","bgsu","bn","bu","bc","bsu","can",
+  "cla","col","cc","cor","dc","du","fsu","hu","hc","lin",
+  "liu","lssu","mhu","mi","mit","mmc","mnst","mu","nd","nea",
+  "neo","niag","nmu","osu","pri","pc","psu","qu","rit","rm",
+  "rpi","scsu","shu","slu","stone", "stthomas", "uaa","uaf","uc","uma","umd",
+  "me","um","uml","umn","unc","und","unh","USNTDP","uvm",
+  "uw","wmu","yu",
+  "army","mtu","uno","sfu","uconn"
+)
+
+oscho_codes <- c(
+  "afa",        # Air Force
+  "agu",        # Augustana
+  "asu",        # Arizona State
+  "bentley",    # Bentley
+  "bgsu",       # Bowling Green
+  "bn",         # Brown
+  "bu",         # Boston University
+  "bc",         # Boston College
+  "bsu",        # Bemidji State
+  "can",        # Canisius
+  "ckn",        # Clarkson
+  "col",        # Colgate
+  "cc",         # Colorado College
+  "cor",        # Cornell
+  "dc",         # Dartmouth
+  "du",         # Denver
+  "fsu",        # Ferris State
+  "hu",         # Harvard
+  "hc",         # Holy Cross
+  "lin",        # Lindenwood
+  "liu",        # LIU
+  "lssu",       # Lake Superior
+  "merc",       # Mercyhurst
+  "msu",        # Michigan State
+  "mit",        # MIT
+  "mc",         # Merrimack
+  "mnst",       # Minnesota State
+  "mu",         # Miami
+  "nd",         # Notre Dame
+  "nea",        # Neumann
+  "nu",         # Northeastern
+  "niag",       # Niagara
+  "nmu",        # Northern Michigan
+  "osu",        # Ohio State
+  "pri",        # Princeton
+  "pc",         # Providence
+  "psu",        # Penn State
+  "qu",         # Quinnipiac
+  "rit",        # RIT
+  "rm",         # Robert Morris
+  "rpi",        # RPI
+  "scsu",       # St. Cloud State
+  "shu",        # Sacred Heart
+  "slu",        # St. Lawrence
+  "stone",      # Stonehill
+  "stthomas",   # St. Thomas
+  "uaa",        # Alaska Anchorage
+  "uaf",        # Alaska
+  "uc",         # Union
+  "uma",        # Massachusetts
+  "umd",        # Minnesota Duluth
+  "me",         # Maine
+  "um",         # Michigan
+  "uml",        # UMass Lowell
+  "umn",        # Minnesota
+  "unc",        # North Carolina
+  "und",        # North Dakota
+  "unh",        # New Hampshire
+  "USNTDP",     # USNTDP
+  "uvm",        # Vermont
+  "uw",         # Wisconsin
+  "wmu",        # Western Michigan
+  "yu",         # Yale
+  "army",       # Army
+  "mtu",        # Michigan Tech
+  "uno",        # Omaha
+  "Simon Fraser", # Simon Fraser
+  "uconn"       # UConn
+)
+
+team_map <- tibble(
+  Team = c(
+    "AIR","AUG","AZS","BEN","BGS","BRO","BUN","BSC","BMS","CAN",
+    "CLA","CLG","COL","COR","DAR","DEN","FSU","HAR","HCR","LIN",
+    "LIU","LSS","MHU","MIS","MIT","MMC","MNS","MOH","NDM","NEA",
+    "NEO","NIA","NMU","OHS","PRI","PRO","PSS","QUI","RIT","RMR",
+    "RPI","SCU","SHU","SLU","STO","UST","UAA","UAF","UCN","UMA",
+    "UMD","UME","UMI","UML","UMN","UNC","UND","UNH", "USNTDP","UVT",
+    "UWI","WMI","YAL", "ARM","MTU","UNO","SFU","UCT"
+  ),
+  home = team_codes,
+  FullName = name_key,
+  oscho = oscho_codes
+)
+
+name_lookup <- tibble(
+  team = short_names,
+  full_name = name_key
+)
+```
+
+```{r}
+#| include: false
+games_df <- map_dfr(composite, ~{
+  tibble(
+    date             = .x$date,
+    game_day         = .x$game_day,
+    visitor_code     = .x$visitor,
+    home_code        = .x$home,
+    visitor_name     = .x$vis_name,
+    home_name        = .x$home_name,
+    vscore           = .x$vscore,
+    hscore           = .x$hscore,
+    arena_name       = .x$arena_name,
+    home_conf        = .x$hconf_name,
+    vis_conf         = .x$vconf_name,
+    gameid           = .x$gameid,
+    boxlink          = .x$boxlink
+  )
+})
+
+games_df <- games_df |>
+  mutate(
+    date   = as.Date(date),
+    vscore = suppressWarnings(as.integer(vscore)),
+    hscore = suppressWarnings(as.integer(hscore))
+  )
+
+```
+
+```{r}
+#| include: false
+team_games <- games_df |>
+  transmute(
+    date, gameid,
+    home_team  = home_name,
+    away_team  = visitor_name,
+    home_goals = hscore,
+    away_goals = vscore
+  )
+
+team_games <- bind_rows(
+  team_games |>
+    transmute(
+      date, gameid,
+      team      = home_team,
+      opponent  = away_team,
+      goals     = home_goals,
+      opp_goals = away_goals,
+      is_home   = 1L
+    ),
+  team_games |>
+    transmute(
+      date, gameid,
+      team      = away_team,
+      opponent  = home_team,
+      goals     = away_goals,
+      opp_goals = home_goals,
+      is_home   = 0L
+    )
+)
+
+# team_games |> group_by(is_home) |> slice_head(n = 3)
+
+team_games <- team_games |>
+  left_join(name_lookup, by = "team") |> filter(is.na(full_name) == FALSE)
+name_lookup <- name_lookup |> mutate(opponent = team) |> select(2:3)
+```
+
+# Outcome Prediction
+
+```{r}
+#| include: false
+
+expanded_team_games <- team_games |>
+  mutate(FullName = full_name) |>
+  left_join(team_map, by = "FullName") |>
+  filter(is.na(FullName) == FALSE) |>
+  select(-Team, -FullName) |> mutate(Team = team)
+
+home_team_short <- expanded_team_games |> filter(full_name == home_team)
+away_team_short <- expanded_team_games |> filter(full_name == away_team)
+
+# limit to Division I men if you have extra games; otherwise use all
+model_data <- expanded_team_games |>
+  filter(date < as.Date(today())) |>  # only past games
+  mutate(
+    team     = factor(team),
+    opponent = factor(opponent)
+  )
+
+goal_model <- glm(
+  goals ~ is_home + team + opponent,
+  family = poisson(link = "log"),
+  data   = model_data
+)
+# summary(goal_model)
+```
+
+```{r}
+#| include: false
+home_team_short_name <- home_team_short$team[1]
+away_team_short_name <- away_team_short$team[1]
+
+newdata <- tibble(
+  team = factor(
+    c(home_team_short_name, away_team_short_name),
+    levels = levels(model_data$team)
+  ),
+  opponent = factor(
+    c(away_team_short_name, home_team_short_name),
+    levels = levels(model_data$opponent)
+  ),
+  is_home = c(1L, 0L)
+)
+
+lambda <- predict(goal_model, newdata, type = "response")
+# lambda  # c(lambda_slu, lambda_union)
+
+lambda_home   <- lambda[1]
+lambda_away <- lambda[2]
+
+
+max_goals <- 10
+i <- 0:max_goals
+j <- 0:max_goals
+
+p_home   <- dpois(i, lambda_home)
+p_away <- dpois(j, lambda_away)
+
+joint <- outer(p_home, p_away)  # P(SLU=i, Clarkson=j)
+
+p_home_win   <- sum(joint[outer(i, j, `>`)])
+p_away_win <- sum(joint[outer(i, j, `<`)])
+p_tie       <- sum(joint[outer(i, j, `==`)])
+```
+
+```{r}
+#| echo: false
+cat("Probability of", home_team, "win: ", p_home_win, "\n")
+cat(home_team, "Expected Goals: ", lambda_home, "\n")
+cat("Probability of", away_team, "win: ", p_away_win, "\n")
+cat(away_team, "Expected Goals: ", lambda_away, "\n")
+cat("Probability of a tie: ", p_tie)
+```
+
+```{r}
+#| echo: false
+game_summary <- tibble(
+  home_team   = home_team,
+  p_home_win  = p_home_win,
+  lambda_home = lambda_home,
+  away_team   = away_team,
+  p_away_win  = p_away_win,
+  lambda_away = lambda_away,
+  p_tie       = p_tie
+) |>
+  mutate(expected_dif_home = lambda_home - lambda_away,
+         expected_dif_away = lambda_away - lambda_home)
+```
+
+```{r}
+#| include: false
+
+# Derive away/home teams for modeling
+games <- games_df |>
+  transmute(
+    date,
+    visitor = visitor_code,
+    home    = home_code,
+    vscore  = as.integer(vscore),
+    hscore  = as.integer(hscore),
+    home_name,
+    visitor_name
+  ) |>
+  filter(!is.na(vscore), !is.na(hscore))
+
+```
+
+```{r}
+#| include: false
+
+# Build Winner/Loser columns
+games_bt <- games |>
+  mutate(
+    winner = if_else(hscore > vscore, home, visitor),
+    loser  = if_else(hscore > vscore, visitor, home)
+  ) |>
+  select(date, winner, loser, home, visitor, hscore, vscore, home_name, visitor_name)
+
+games_bt <- games_bt |>
+  mutate(
+    winner = factor(winner),
+    loser  = factor(loser)
+  )
+
+# ensure same levels in both
+all_teams <- union(levels(games_bt$winner), levels(games_bt$loser))
+games_bt <- games_bt |>
+  mutate(
+    winner = factor(winner, levels = all_teams),
+    loser  = factor(loser,  levels = all_teams)
+  )
+
+games_bt$Y1 <- 1   # winner always has 1 win in each row
+games_bt$Y2 <- 0   # loser has 0
+
+```
+
+```{r}
+#| include: false
+# Fit a Bradley–Terry model
+
+# Put into the format BTm expects:
+bt_model <- BTm(
+  outcome = cbind(Y1, Y2),
+  player1 = winner,
+  player2 = loser,
+  data    = games_bt
+)
+```
+
+```{r}
+#| include: false
+abilities <- BTabilities(bt_model)
+ratings <- as.data.frame(abilities)
+ratings$team <- rownames(ratings)
+
+ratings <- ratings |>
+  arrange(desc(ability)) |>
+  mutate(
+    rank  = row_number(),
+    power = exp(ability) / sum(exp(ability))
+  ) |>
+  select(rank, team, ability, power) |>
+  mutate(team = fct_reorder(team, power))
+
+ratings_plot <- ratings |> arrange(rank) |> slice(1:65) |> mutate(oscho = team) |> left_join(team_map, by = "oscho") |> mutate(FullName = fct_reorder(FullName, rank, .desc = TRUE)) |> filter(!is.na(FullName))
+```
+
+```{r read goalie stats}
+#| include: false
+
+#  "https://www.quanthockey.com/ncaa/en/seasons/ncaa-goalies-stats.html",
+
+goalies_df1 <- read_xlsx(here("Data/QuantHockey_1_28_2026_1.xlsx"), skip = 1, sheet = 2)
+goalies_df2 <- read_xlsx(here("Data/QuantHockey_1_28_2026_2.xlsx"), skip = 1, sheet = 2)
+# combine files
+goalies_df <- goalies_df1 |> bind_rows(goalies_df2) |> rename(SVPrct = `SV%`)
+
+# view(goalies_df)
+#games_bt |> group_by(home) |> slice(1) |> summarise(home = home) |> print(n = 100)
+# goalies_df |> group_by(Team) |> slice(1) |> summarise(Team = Team) |> print(n = 100)
+```
+
+```{r create name and code parity columns}
+#| include: false
+
+# cleaning
+goalies_df <- goalies_df |>
+  left_join(team_map, by = "Team") |>
+  mutate(quanthockey_code = Team) |>
+  mutate(Team = home) |>   # or mutate(Team = home) to overwrite
+  select(-home) |>
+  filter(SVPrct != is.na(SVPrct)) |>
+  mutate(across(c(1, 4:18), as.numeric))
+```
+
+```{r create new goalie save stats}
+#| include: false
+
+# create a league wide save average
+goalies_df <- goalies_df |>
+  mutate(SVpercent_league = mean(SVPrct))
+
+
+# compute goals saved above average for goalies
+goalies_df <- goalies_df |> mutate(GSAA = (SOG * (1 - SVpercent_league)) - GA)
+
+
+# create a column with the save percent relative to one's team
+goalies_df <- goalies_df |>
+  group_by(Team) |>
+  mutate(team_save_prct = mean(SVPrct)) |>
+  ungroup() |>
+  mutate(relative_save_prct = SVPrct - team_save_prct)
+```
+
+```{r find home players}
+#| include: false
+# build a column with 
+goalies_df <- games_df |> select(home_code, home_name) |> group_by(home_code) |> slice(1) |> ungroup() |> rename(Team = home_code, "Team_name" = home_name) |> right_join(goalies_df, by = "Team")
+
+# filtering to the players of the selected home team
+home_goalies_df <- goalies_df |> filter(FullName == home_team)
+away_goalies_df <- goalies_df |> filter(FullName == away_team)
+
+throwaway_goalies_df <- goalies_df |>
+  mutate(type = case_when(
+    FullName == home_team ~ "Home",
+    FullName == away_team ~ "Away",
+    TRUE                  ~ "Other"
+  ))
+
+
+home_name <- throwaway_goalies_df |> filter(type == "Home") |> slice(1) |> pull(FullName)
+away_name <- throwaway_goalies_df |> filter(type == "Away") |> slice(1) |> pull(FullName)
+```
+
+```{r}
+throwaway_home_df <- ratings_plot |> filter(FullName == home_team) |> mutate(Team = FullName)
+
+throwaway_away_df <- ratings_plot |> filter(FullName == away_team) |> mutate(Team = FullName)
+```
+
+# Power / Ability
+
+```{r fig.height=8.6, fig.width=10}
+#| echo: false
+#| warning: false
+
+p1 <- ggplot(ratings_plot, aes(x = FullName, y = power)) +
+  geom_segment(aes(xend = FullName, y = 0, yend = power), color = "grey40", linewidth = 1.5) +
+  geom_point(color = "grey20") +
+  geom_point(
+    data = throwaway_home_df,
+    aes(color = home_name),
+    size = 5,
+    alpha = 0.5
+  ) +
+  geom_point(
+    data = throwaway_away_df,
+    aes(color = away_name),
+    size = 5,
+    alpha = 0.5
+  ) +
+  coord_flip() +
+  theme_bw() +
+  ylab("Power") +
+  xlab("Team Name") +
+  theme(panel.background = element_rect(fill = "grey95"),
+        panel.heights = unit(8, "in"),
+        panel.widths = unit(3.75, "in")
+        ) +
+  scale_color_manual(
+    name   = NULL,
+    values = setNames(c("green", "red"), c(home_name, away_name))
+  ) +
+  labs(caption = " ")
+
+p2 <- ggplot(ratings_plot, aes(x = team, y = ability)) +
+  geom_col() +
+  geom_col(data = throwaway_away_df,
+           aes(fill = away_name)) +
+  geom_col(data = throwaway_home_df,
+           aes(fill = home_name)) +
+  coord_flip() + 
+  theme_bw() +
+  ylab("Ability") +
+  theme(panel.background = element_rect(fill = "grey95"),
+        panel.heights = unit(8, "in"),
+        panel.widths = unit(4, "in"),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  labs(caption = "Only the top 65 teams are visualized here as the lower 20 are significantly lower than every other team and have very little data.") +
+  scale_fill_manual(
+    name = NULL,
+    values = setNames(c("green", "red"), c(home_name, away_name))
+  )
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+# Goalie Stats
+
+## Identifying performance of goalie relative to teams
+
+```{r GSAA vs SVPrct}
+#| echo: false
+
+label_df <- throwaway_goalies_df |>
+  filter(type %in% c("Home", "Away"))   # only the colored points
+
+ggplot(throwaway_goalies_df, aes(x = GSAA, y = SVPrct)) +
+  geom_point(
+    aes(size = GP),
+    data = subset(throwaway_goalies_df, type == "Other"),
+    color = "grey50",
+    show.legend = FALSE,
+    alpha = 0.2
+  ) +
+  geom_point(
+    data = subset(throwaway_goalies_df, type == "Home"),
+    aes(color = home_name, size = GP)
+  ) +
+  geom_point(
+    data = subset(throwaway_goalies_df, type == "Away"),
+    aes(color = away_name, size = GP)
+  ) +
+  # text labels next to those colored points
+  geom_text(
+    data = label_df,
+    aes(label = Name),
+    nudge_y = 0.015, # adjust until it looks right
+    nudge_x = 0, # or a small +/- to move left/right
+    show.legend = FALSE
+  ) +
+  scale_color_manual(
+    name   = NULL,
+    values = setNames(c("green", "red"), c(home_name, away_name))
+  ) +
+  theme_bw() +
+  labs(
+    title = "Goalie Saves Above Average by Save Percent",
+    size  = "Games Played"
+  )
+```
+
+**`r home_team` Goalies**
+
+```{r table of home and away goalies}
+#| echo: false
+#| warning: false
+col_map = c("Rank", "Name", "Age" , "Games Played", "Save %", "Wins", "Losses", "Goals Allowed", "Saves", "Shots on Goal", "Time", "Goals Saved Above Average", "Relative Save %")
+
+home_goalies_df |> select(Rk, Name, Age, GP, SVPrct, W, L, GA, SV, SOG, TIME, GSAA, relative_save_prct) |>
+  mutate(GSAA = round(GSAA, digits = 3)) |>
+  mutate(relative_save_prct = round(relative_save_prct, digits = 3)) |>
+  reactable(columns = list(
+    Rk = colDef(name = "Rank"),
+    Name = colDef(name = "Name"),
+    Age = colDef(name = "Age"),
+    GP = colDef(name = "Games Played"),
+    SVPrct = colDef(name = "Save %"),
+    W = colDef(name = "Wins"),
+    L = colDef(name = "Losses"),
+    GA = colDef(name = "Goals Allowed"),
+    SV = colDef(name = "Saves"),
+    SOG = colDef(name = "Shots on Goal"),
+    TIME = colDef("Time On Ice"),
+    GSAA = colDef("Goals Saved Above Average"),
+    relative_save_prct = colDef("Relative Save Percent")
+))
+```
+
+**`r away_team` Goalies**
+
+```{r}
+#| echo: false
+away_goalies_df |> select(Rk, Name, Age, GP, SVPrct, W, L, GA, SV, SOG, TIME, GSAA, relative_save_prct) |>
+  mutate(GSAA = round(GSAA, digits = 3)) |>
+  mutate(relative_save_prct = round(relative_save_prct, digits = 3)) |>
+  reactable(columns = list(
+    Rk = colDef(name = "Rank"),
+    Name = colDef(name = "Name"),
+    Age = colDef(name = "Age"),
+    GP = colDef(name = "Games Played"),
+    SVPrct = colDef(name = "Save %"),
+    W = colDef(name = "Wins"),
+    L = colDef(name = "Losses"),
+    GA = colDef(name = "Goals Allowed"),
+    SV = colDef(name = "Saves"),
+    SOG = colDef(name = "Shots on Goal"),
+    TIME = colDef("Time On Ice"),
+    GSAA = colDef("Goals Saved Above Average"),
+    relative_save_prct = colDef("Relative Save Percent")
+))
+```
+
+```{r get team colors}
+#| include: false
+source(here("Scripts/loadRanks.R"))
+
+chart_colors <- c(
+  "Boston College"    = "#98002E",
+  "Boston University" = "#CC0000",
+  "Harvard"           = "#A51C30",
+  "Dartmouth"         = "#00693E",
+  "Cornell"           = "#B31B1B",
+  "Clarkson"          = "#006736",
+  "Quinnipiac"        = "#003366",
+  "Yale"              = "#00356B",
+  "Brown"             = "#4E3629",
+  "Princeton"         = "#EE7F2D",
+  "RPI"               = "#D6001C",
+  "Union"             = "#7C2529",
+  "Colgate"           = "#8B2332",
+  "Vermont"           = "#005837",
+  "UMass Lowell"      = "#005DAA",
+  "Massachusetts"     = "#881C1C",
+  "Connecticut"       = "#002654",
+  "Maine"             = "#1E4D2B",
+  "New Hampshire"     = "#003DA5",
+  "Providence"        = "#231F20",
+  "Northeastern"      = "#CC0000",
+  "Michigan"          = "#00274C",
+  "Michigan State"    = "#18453B",
+  "Michigan Tech"     = "#FFC20E",
+  "Notre Dame"        = "#0C2340",
+  "Ohio State"        = "#BB0000",
+  "Penn State"        = "#041E42",
+  "Wisconsin"         = "#C5050C",
+  "Minnesota"         = "#7A0019",
+  "Minnesota Duluth"  = "#862633",
+  "Minnesota State"   = "#4B306A",
+  "St. Cloud State"   = "#CC0000",
+  "North Dakota"      = "#009A44",
+  "Denver"            = "#8B2332",
+  "Colorado College"  = "#FFCC00",
+  "Western Michigan"  = "#6F4E37",
+  "Omaha"             = "#D71920",
+  "Bemidji State"     = "#004B3C",
+  "Bowling Green"     = "#F15A22",
+  "Ferris State"      = "#862633",
+  "Lake Superior"     = "#00539B",
+  "Northern Michigan" = "#035642",
+  "Miami"             = "#CE1126",
+  "RIT"               = "#F76902",
+  "Canisius"          = "#002D72",
+  "Mercyhurst"        = "#00534E",
+  "Niagara"           = "#582C83",
+  "Air Force"         = "#003087",
+  "Army"              = "#C5B783",
+  "Robert Morris"     = "#00205B",
+  "Lindenwood"        = "#A39161",
+  "LIU"               = "#00B5E2",
+  "Sacred Heart"      = "#D21034",
+  "Holy Cross"        = "#4F2683",
+  "Stonehill"         = "#4B306A",
+  "St. Thomas"        = "#4F2C7F",
+  "Augustana"         = "#002855",
+  "Alaska"            = "#FFCD00",
+  "Alaska Anchorage"  = "#006241",
+  "AIC"               = "#FFC72C",
+  "Alabama Huntsville"= "#0033A0",
+  "St. Lawrence"      = "#CE1126"
+)
+```
+
+```{r npi-rank-time, fig.height=10, fig.width=8}
+#| echo: false
+npi <- load_npi()
+
+# Map full names -> short names using name_lookup you built earlier
+home_short <- name_lookup |>
+  filter(full_name == home_team) |>
+  pull(opponent) |> first()
+
+away_short <- name_lookup |>
+  filter(full_name == away_team) |>
+  pull(opponent) |> first()
+
+# Tag rows by role
+npi_tagged <- npi |>
+  mutate(
+    type = case_when(
+      team == home_short ~ "Home",
+      team == away_short ~ "Away",
+      TRUE               ~ "Other"
+    )
+  )
+
+latest_season <- max(npi_tagged$season)
+
+npi_labels <- npi_tagged |>
+  group_by(team) |>
+  filter(season == latest_season) |>
+  slice_tail(n = 1) |>
+  ungroup()
+
+home_rank <- npi_labels |> filter(team == home_short) |> pull(rank)
+
+away_rank <- npi_labels |> filter(team == away_short) |> pull(rank)
+
+ggplot(npi_tagged, aes(x = season, y = rank, group = team)) +
+  # other teams: thin grey
+  geom_line(
+    data = subset(npi_tagged, type == "Other"),
+    aes(group = team),
+    color = "grey70",
+    linewidth = 0.4
+  ) +
+  geom_point(
+    data = subset(npi_tagged, type == "Other"),
+    color = "grey70",
+    size = 1.5
+  ) +
+  # home team: thick green
+  geom_line(
+    data = subset(npi_tagged, type == "Home"),
+    aes(color = "Home"),
+    linewidth = 2
+  ) +
+  geom_point(
+    data = subset(npi_tagged, type == "Home"),
+    aes(color = "Home"),
+    size = 3
+  ) +
+  # away team: thick red
+  geom_line(
+    data = subset(npi_tagged, type == "Away"),
+    aes(color = "Away"),
+    linewidth = 2
+  ) +
+  geom_point(
+    data = subset(npi_tagged, type == "Away"),
+    aes(color = "Away"),
+    size = 3
+  ) +
+  # labels only for home/away
+  geom_text_repel(
+    data = npi_labels |> filter(type != "Other"),
+    aes(x = season, y = rank, label = str_c(rank, " - ",team), color = type),
+    nudge_x = 1.8,
+    direction = "y",
+    hjust = 0,
+    segment.color = NA,
+    size = 3.1,
+    max.overlaps = Inf
+  ) +
+  scale_y_reverse() +
+  scale_color_manual(
+    values = c(Home = "forestgreen", Away = "red3"),
+    breaks = c("Home", "Away"),
+    labels = c(home_short, away_short),
+    guide = "none"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(margin = margin(r = 5), face = "bold"),
+    axis.text   = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```

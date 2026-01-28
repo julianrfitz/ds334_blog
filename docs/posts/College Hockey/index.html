@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Julian Fitz">
+<meta name="dcterms.date" content="2026-01-28">
 
-<title>ds334_blog</title>
+<title>Hockey Game Prediction – ds334_blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +22,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,79 +105,37 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<script src="../../site_libs/core-js-2.5.3/shim.min.js"></script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
+<script src="../../site_libs/react-18.2.0/react.min.js"></script>
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
+<script src="../../site_libs/react-18.2.0/react-dom.min.js"></script>
 
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+<script src="../../site_libs/reactwidget-2.0.0/react-tools.js"></script>
 
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
+<link href="../../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<link href="../../site_libs/reactable-0.4.5/reactable.css" rel="stylesheet">
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
+<script src="../../site_libs/reactable-binding-0.4.5/reactable.js"></script>
 
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="ds334_blog" href="index.xml" data-external="1"></head>
 
-<body class="nav-fixed quarto-light">
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">ds334_blog</span>
     </a>
   </div>
@@ -153,7 +146,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -176,140 +169,138 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">ds334_blog</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Hockey Game Prediction</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">sports</div>
+                <div class="quarto-category">hockey</div>
+                <div class="quarto-category">analysis</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Julian Fitz </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 28, 2026</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="YW5hbHlzaXM=">analysis <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y29kZQ==">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aG9ja2V5">hockey <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c3BvcnRz">sports <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="c3BvcnRzJTJDaG9ja2V5JTJDYW5hbHlzaXM=" data-listing-date-sort="1769576400000" data-listing-file-modified-sort="1769635928479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="30" data-listing-word-count-sort="5931">
-<div class="thumbnail"><a href="./posts/College Hockey/index.html" class="no-external">
-
-<p class="card-img-top"><img src="posts\College Hockey\index_files\figure-html\unnamed-chunk-15-1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/College Hockey/index.html" class="no-external">Hockey Game Prediction</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3BvcnRz'); return false;">sports</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('aG9ja2V5'); return false;">hockey</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YW5hbHlzaXM='); return false;">analysis</div>
-
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Set the variables</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># url &lt;- "https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>home_team <span class="ot">&lt;-</span> <span class="st">"St. Lawrence University"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>away_team <span class="ot">&lt;-</span> <span class="st">"Quinnipiac University"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="delink listing-description"><a href="./posts/College Hockey/index.html" class="no-external">
-Set the variables
-</a></div>
+</section>
+<section id="outcome-prediction" class="level1">
+<h1>Outcome Prediction</h1>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Probability of St. Lawrence University win:  0.02756388 </code></pre>
 </div>
-<div class="metadata">
-<a href="./posts/College Hockey/index.html" class="no-external">
-<div class="listing-date">
-Jan 28, 2026
+<div class="cell-output cell-output-stdout">
+<pre><code>St. Lawrence University Expected Goals:  1.583893 </code></pre>
 </div>
-<div class="listing-author">
-Julian Fitz
+<div class="cell-output cell-output-stdout">
+<pre><code>Probability of Quinnipiac University win:  0.8876717 </code></pre>
 </div>
-</a>
+<div class="cell-output cell-output-stdout">
+<pre><code>Quinnipiac University Expected Goals:  6.106541 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Probability of a tie:  0.03758455</code></pre>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="bmV3cyUyQ2NvZGUlMkNhbmFseXNpcw==" data-listing-date-sort="1769576400000" data-listing-file-modified-sort="1769626548803" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="9">
-<div class="thumbnail"><a href="./posts/post-with-code/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/post-with-code/image.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/post-with-code/index.html" class="no-external">Post With Code</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">news</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29kZQ=='); return false;">code</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YW5hbHlzaXM='); return false;">analysis</div>
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>throwaway_home_df <span class="ot">&lt;-</span> ratings_plot <span class="sc">|&gt;</span> <span class="fu">filter</span>(FullName <span class="sc">==</span> home_team) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Team =</span> FullName)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>throwaway_away_df <span class="ot">&lt;-</span> ratings_plot <span class="sc">|&gt;</span> <span class="fu">filter</span>(FullName <span class="sc">==</span> away_team) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Team =</span> FullName)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="delink listing-description"><a href="./posts/post-with-code/index.html" class="no-external">
-This is a post with executable code.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/post-with-code/index.html" class="no-external">
-<div class="listing-date">
-Jan 28, 2026
-</div>
-<div class="listing-author">
-Harlow Malloc
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bmV3cw==" data-listing-date-sort="1769317200000" data-listing-file-modified-sort="1769626548795" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
-<div class="thumbnail"><a href="./posts/welcome/index.html" class="no-external">
-
-<p class="card-img-top"><img src="posts\welcome\thumbnail.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/welcome/index.html" class="no-external">Welcome To My Blog</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">news</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/welcome/index.html" class="no-external">
-This is the first post in a Quarto blog. Welcome!
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/welcome/index.html" class="no-external">
-<div class="listing-date">
-Jan 25, 2026
-</div>
-<div class="listing-author">
-Tristan O’Malley
-</div>
-</a>
+</section>
+<section id="power-ability" class="level1">
+<h1>Power / Ability</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</section>
+<section id="goalie-stats" class="level1">
+<h1>Goalie Stats</h1>
+<section id="identifying-performance-of-goalie-relative-to-teams" class="level2">
+<h2 class="anchored" data-anchor-id="identifying-performance-of-goalie-relative-to-teams">Identifying performance of goalie relative to teams</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/GSAA vs SVPrct-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>St.&nbsp;Lawrence University Goalies</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-71df84d497b9b866f272" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-71df84d497b9b866f272">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[51,82,107],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[14,9,4],"SVPrct":[0.873,0.883,0.919],"W":[2,0,1],"L":[11,7,2],"GA":[55,37,13],"SV":[379,278,148],"SOG":[434,315,161],"TIME":[812,493,241],"GSAA":[-9.83,-4.215,3.757],"relative_save_prct":[-0.019,-0.009,0.027]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"afa1cd1609d1b2137e88db89d704a11a"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p><strong>Quinnipiac University Goalies</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-5bec99c3295f12778ff4" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5bec99c3295f12778ff4">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[31,84,153],"Name":["Matej Marinov","Dylan Silverstein","Sam Scopa"],"Age":[22,21,20],"GP":[18,9,1],"SVPrct":[0.896,0.926,1],"W":[13,6,0],"L":[3,2,0],"GA":[44,13,0],"SV":[378,163,1],"SOG":[422,176,1],"TIME":[1081,485,3],"GSAA":[-0.079,5.318,0.104],"relative_save_prct":[-0.045,-0.015,0.059]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"27f57841e403238d83b467d64e70bda4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/npi-rank-time-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
