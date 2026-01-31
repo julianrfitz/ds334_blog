@@ -8,6 +8,7 @@
 
 <meta name="author" content="Julian Fitz">
 <meta name="dcterms.date" content="2026-01-28">
+<meta name="description" content="Simple college hockey dashboard with game outcome prediction">
 
 <title>Hockey Game Prediction – ds334_blog</title>
 <style>
@@ -171,7 +172,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Hockey Game Prediction</h1>
-                                <div class="quarto-categories">
+                  <div>
+        <div class="description">
+          Simple college hockey dashboard with game outcome prediction
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">sports</div>
                 <div class="quarto-category">hockey</div>
                 <div class="quarto-category">analysis</div>
@@ -211,34 +217,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>Set the variables</p>
+<section id="set-the-variables" class="level3">
+<h3 class="anchored" data-anchor-id="set-the-variables">Set the variables</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># url &lt;- "https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>home_team <span class="ot">&lt;-</span> <span class="st">"St. Lawrence University"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>away_team <span class="ot">&lt;-</span> <span class="st">"Quinnipiac University"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>away_team <span class="ot">&lt;-</span> <span class="st">"Princeton University"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="outcome-prediction" class="level1">
 <h1>Outcome Prediction</h1>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of St. Lawrence University win:  0.02756388 </code></pre>
+<pre><code>Probability of St. Lawrence University win:  0.09515896 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>St. Lawrence University Expected Goals:  1.583893 </code></pre>
+<pre><code>St. Lawrence University Expected Goals:  1.880149 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of Quinnipiac University win:  0.8876717 </code></pre>
+<pre><code>Probability of Princeton University win:  0.8048577 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Quinnipiac University Expected Goals:  6.106541 </code></pre>
+<pre><code>Princeton University Expected Goals:  4.613852 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of a tie:  0.03758455</code></pre>
+<pre><code>Probability of a tie:  0.09203802</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -275,15 +280,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>St.&nbsp;Lawrence University Goalies</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-71df84d497b9b866f272" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-71df84d497b9b866f272">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[51,82,107],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[14,9,4],"SVPrct":[0.873,0.883,0.919],"W":[2,0,1],"L":[11,7,2],"GA":[55,37,13],"SV":[379,278,148],"SOG":[434,315,161],"TIME":[812,493,241],"GSAA":[-9.83,-4.215,3.757],"relative_save_prct":[-0.019,-0.009,0.027]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"afa1cd1609d1b2137e88db89d704a11a"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-02368cdd428c0387c436" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-02368cdd428c0387c436">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[49,82,104],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[15,9,5],"SVPrct":[0.873,0.883,0.903],"W":[2,0,1],"L":[11,7,3],"GA":[57,37,18],"SV":[392,278,168],"SOG":[449,315,186],"TIME":[840,493,272],"GSAA":[-10.001,-4.027,1.47],"relative_save_prct":[-0.013,-0.003,0.017]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"ee6c93340849a9e25859b6a091eb9d48"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p><strong>Quinnipiac University Goalies</strong></p>
+<p><strong>Princeton University Goalies</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-5bec99c3295f12778ff4" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5bec99c3295f12778ff4">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[31,84,153],"Name":["Matej Marinov","Dylan Silverstein","Sam Scopa"],"Age":[22,21,20],"GP":[18,9,1],"SVPrct":[0.896,0.926,1],"W":[13,6,0],"L":[3,2,0],"GA":[44,13,0],"SV":[378,163,1],"SOG":[422,176,1],"TIME":[1081,485,3],"GSAA":[-0.079,5.318,0.104],"relative_save_prct":[-0.045,-0.015,0.059]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"27f57841e403238d83b467d64e70bda4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-cc1d3556998615cc3e8b" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-cc1d3556998615cc3e8b">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[75,80,133],"Name":["Conor Callaghan","Arthur Smith","Daniel Moor"],"Age":[22,21,19],"GP":[11,10,2],"SVPrct":[0.906,0.913,0.852],"W":[7,5,0],"L":[2,5,1],"GA":[23,24,4],"SV":[221,253,23],"SOG":[244,277,27],"TIME":[588,584,85],"GSAA":[2.541,4.995,-1.174],"relative_save_prct":[0.016,0.023,-0.038]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"e71d389b3479c7119fa6c6e9c0a6b0f2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">

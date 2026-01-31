@@ -11,21 +11,14 @@
     "href": "posts/College Hockey/index.html",
     "title": "Hockey Game Prediction",
     "section": "",
-    "text": "Set the variables\n\n# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Quinnipiac University\""
-  },
-  {
-    "objectID": "posts/College Hockey/index.html#setup",
-    "href": "posts/College Hockey/index.html#setup",
-    "title": "Hockey Game Prediction",
-    "section": "",
-    "text": "Set the variables\n\n# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Quinnipiac University\""
+    "text": "# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Princeton University\""
   },
   {
     "objectID": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
     "href": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
     "title": "Hockey Game Prediction",
     "section": "Identifying performance of goalie relative to teams",
-    "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nQuinnipiac University Goalies"
+    "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nPrinceton University Goalies"
   },
   {
     "objectID": "about.html",
@@ -39,7 +32,7 @@
     "href": "index.html",
     "title": "ds334_blog",
     "section": "",
-    "text": "Hockey Game Prediction\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 28, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 28, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 25, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
+    "text": "Hockey Game Prediction\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nSimple college hockey dashboard with game outcome prediction\n\n\n\n\n\nJan 28, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 28, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 25, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",

@@ -3,13 +3,10 @@ title: "Hockey Game Prediction"
 author: "Julian Fitz"
 date: "2026-01-28"
 categories: [sports, hockey, analysis]
+description: "Simple college hockey dashboard with game outcome prediction"
 ---
 
-Simple college hockey dashboard with game outcome prediction
-
-## Setup
-
-Set the variables
+### Set the variables
 
 ```{r}
 #| include: false
@@ -31,7 +28,7 @@ source(here("Scripts/loadRanks.R"))
 # url <- "https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/"
 url <- "https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/"
 home_team <- "St. Lawrence University"
-away_team <- "Quinnipiac University"
+away_team <- "Princeton University"
 ```
 
 ```{r}
@@ -485,8 +482,8 @@ ratings_plot <- ratings |> arrange(rank) |> slice(1:65) |> mutate(oscho = team) 
 
 #  "https://www.quanthockey.com/ncaa/en/seasons/ncaa-goalies-stats.html",
 
-goalies_df1 <- read_xlsx(here("Data/QuantHockey_1_28_2026_1.xlsx"), skip = 1, sheet = 2)
-goalies_df2 <- read_xlsx(here("Data/QuantHockey_1_28_2026_2.xlsx"), skip = 1, sheet = 2)
+goalies_df1 <- read_xlsx(here("Data/QuantHockey_1_31_2026_1.xlsx"), skip = 1, sheet = 2)
+goalies_df2 <- read_xlsx(here("Data/QuantHockey_1_31_2026_2.xlsx"), skip = 1, sheet = 2)
 # combine files
 goalies_df <- goalies_df1 |> bind_rows(goalies_df2) |> rename(SVPrct = `SV%`)
 
