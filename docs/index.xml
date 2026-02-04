@@ -215,5 +215,59 @@ font-style: inherit;">1</span></span></code></pre></div></div>
   <guid>https://your-website-url.example.com/posts/welcome/</guid>
   <pubDate>Sun, 25 Jan 2026 05:00:00 GMT</pubDate>
 </item>
+<item>
+  <title>Super Bowl Analysis</title>
+  <link>https://your-website-url.example.com/posts/SuperBowl-Analysis/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Historical wins</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/SuperBowl-Analysis/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/SuperBowl-Analysis/index_files/figure-html/plot- team recor after change in ownership-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>IS SELLING A TEAM GOOD FOR THEIR RECORD</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/SuperBowl-Analysis/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/SuperBowl-Analysis/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <guid>https://your-website-url.example.com/posts/SuperBowl-Analysis/</guid>
+  <pubDate>Wed, 04 Feb 2026 04:23:03 GMT</pubDate>
+</item>
 </channel>
 </rss>

@@ -1,0 +1,219 @@
+---
+title: "Super Bowl Analysis"
+format: html
+---
+
+```{r}
+#| include: false
+library(nflfastR)
+library(nflreadr)
+library(tidyverse)
+library(lubridate)
+library(here)
+
+team_df <- read_csv(here("Data/nfl_teams.csv"))
+games_df <- read_csv(here("Data/nfl_games.csv")) |> mutate(home_team == case_when(home_team == "STL" ~ "LA",
+                                                                                  TRUE ~ home_team)) |>
+  mutate(away_team = case_when(away_team == "STL" ~ "LA",
+                               TRUE ~ away_team))
+``` 
+
+
+```{r crate team wins by year}
+#| include: false
+historical_wins_df <- games_df |>
+   select(season, home_team, away_team, home_score, away_score) |>
+  mutate(winner = case_when(home_score > away_score ~ home_team,
+                            home_score < away_score ~ away_team,
+                            home_score == away_score ~ "tie")
+  )
+
+season_wins <- historical_wins_df |> group_by(winner, season) |> summarise(wins = n()) |> filter(winner != "tie") |> rename(team = winner)
+``` 
+
+Historical wins
+```{r}
+#| echo: false
+ggplot(season_wins, aes(x = season, y = wins, group = team)) +
+  geom_line(alpha = 0.2) +
+  theme_minimal()
+```
+
+```{r}
+#| include: false
+#run_df_1 <- pbp_df |> filter(play_type == "run") |> mutate(game_date = #ymd(game_date)) |> mutate(season = year(game_date)) |> group_by(posteam, season) #|> summarise(yards_gained = sum(yards_gained))
+
+sales_df <- tibble(team = c("WAS", "DEN", "CAR", "BUF", "CLE", "JAX", "LA", "MIA"), sale_year = c(2023, 2022, 2018, 2014, 2012, 2011, 2010, 2008))
+
+team_sales_df <- left_join(season_wins, sales_df, by = "team") |>
+  mutate(sale_year = case_when(sale_year == season ~ sale_year,
+                              sale_year != season ~ NA))
+
+
+primary_color_df <- teams_colors_logos |> select(team_abbr, team_color) |>
+  rename(team = team_abbr) |>
+  mutate(team_color = case_when(
+      team == "BUF" ~ "#C60C30",  # Bills bright red
+      team == "CAR" ~ "#0085CA",  # Panthers blue
+      team == "CLE" ~ "#311D00",  # Browns dark brown
+      team == "DEN" ~ "#FF8200",  # Broncos vivid orange
+      team == "JAX" ~ "#D7A22A",  # Jags gold accent
+      team == "LA"  ~ "#FFD100",  # Rams yellow
+      team == "MIA" ~ "#008E97",  # Dolphins aqua
+      team == "WAS" ~ "#773141",  # Commanders burgundy
+      TRUE             ~ team
+    ))
+
+team_sales_record_df <- team_sales_df |> left_join(primary_color_df, by = "team")
+
+recently_sold_history <- left_join(season_wins, sales_df, by = "team") |>
+  filter(is.na(sale_year) == FALSE) |>
+  filter(season >= sale_year) |> select(1:3) |>
+  left_join(primary_color_df, by = "team") |>
+  mutate(team_color = case_when(
+      team == "BUF" ~ "#C60C30",  # Bills bright red
+      team == "CAR" ~ "#0085CA",  # Panthers blue
+      team == "CLE" ~ "#311D00",  # Browns dark brown
+      team == "DEN" ~ "#FF8200",  # Broncos vivid orange
+      team == "JAX" ~ "#D7A22A",  # Jags gold accent
+      team == "LA"  ~ "#FFD100",  # Rams yellow
+      team == "MIA" ~ "#008E97",  # Dolphins aqua
+      team == "WAS" ~ "#773141"  # Commanders burgundy
+    )) |>
+  filter(season != 2026)
+
+```
+
+```{r plot: team recor after change in ownership}
+#| echo: false
+#| warning: false
+ggplot(team_sales_record_df, aes(x = season, y = wins, group = team)) +
+  geom_line(alpha = 0.2) +
+  geom_line(
+    data = recently_sold_history,
+    aes(x = season, y = wins, color = team_color),
+    linewidth = 2,
+    stat = 
+  ) +
+  geom_point(
+    aes(x = sale_year, y = wins, color = team_color),
+    size = 4
+  ) +
+  scale_color_identity(guide = "legend",
+    breaks = unique(recently_sold_history$team_color),
+    labels = unique(recently_sold_history$team)) +
+  theme_minimal() +
+  labs(
+    caption = "Dots mark year sold",
+    title = "Team record after change in ownership",
+    color = "Team Color"
+  ) +
+  theme()
+```
+
+IS SELLING A TEAM GOOD FOR THEIR RECORD
+
+```{r building before vs after}
+#| include: false
+## before
+old_records_df <- team_sales_record_df |> filter(team %in% c("BUF", "CAR", "CLE", "DEN", "JAX", "LA", "MIA", "WAS")) |>
+  filter(case_when(team == "WAS" ~ season <= 2023,
+                   team == "BUF" ~ season <= 2014,
+                   team == "CAR" ~ season <= 2018,
+                   team == "CLE" ~ season <= 2012,
+                   team == "DEN" ~ season <= 2022,
+                   team == "JAX" ~ season <= 2011,
+                   team == "LA"  ~ season <= 2010, 
+                   team == "MIA" ~ season <= 2008
+                   ))
+
+new_records_df <- team_sales_record_df |> filter(team %in% c("BUF", "CAR", "CLE", "DEN", "JAX", "LA", "MIA", "WAS")) |>
+  filter(case_when(team == "WAS" ~ season >= 2023,
+                   team == "BUF" ~ season >= 2014,
+                   team == "CAR" ~ season >= 2018,
+                   team == "CLE" ~ season >= 2012,
+                   team == "DEN" ~ season >= 2022,
+                   team == "JAX" ~ season >= 2011,
+                   team == "LA"  ~ season >= 2010, 
+                   team == "MIA" ~ season >= 2008
+                   ))
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+ggplot(team_sales_record_df, aes(x = season, y = wins, group = team)) +
+  
+  geom_line(
+    data = recently_sold_history,
+    aes(x = season, y = wins, color = team_color),
+    linewidth = 2
+  ) +
+  
+  geom_point(
+    aes(x = sale_year, y = wins, color = team_color),
+    size = 4
+  ) +
+  
+  geom_line(
+    data = old_records_df,
+    aes(x = season, y = wins, color = team_color),
+    linewidth = 2.75,
+    alpha = 0.2) +
+  
+  scale_color_identity(
+    guide = "legend",
+    breaks = unique(recently_sold_history$team_color),
+    labels = unique(recently_sold_history$team)
+    ) +
+  
+  theme_minimal() +
+  
+  labs(
+    caption = "Dots mark year sold",
+    title = "Team record before and after change in ownership",
+    color = "Team Color"
+  )
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+ggplot(old_records_df, aes(x = season, y = wins)) +
+  geom_line(aes(color = team_color), 
+            linewidth = 2,
+            alpha = 0.1) +
+  geom_line(color = "black",
+            linewidth = 2,
+            alpha = 0.2) +
+  geom_line(data = new_records_df,
+            aes(color = team_color),
+            linewidth = 1.5,
+            alpha = 0.75) +
+  geom_line(data = new_records_df,
+            color = "black",
+            linewidth = 1.5,
+            alpha = 0.2) +
+  geom_point(
+    aes(x = sale_year, y = wins, color = team_color),
+    size = 4
+  ) +
+  geom_smooth(method = lm,
+              se = FALSE,
+              color = "green3",
+              linewidth = 2.5) + 
+  facet_wrap(~ team, ncol = 2, scales = "free") +# linear smoother for before sale
+  geom_smooth(data = new_records_df,
+              method = lm ,
+              se = FALSE, 
+              color = "green3",
+              linewidth = 2.5) + # linear smoother for after sale
+  theme_void() +
+  scale_color_identity(
+    breaks = unique(old_records_df$team_color),
+    labels = unique(old_records_df$team)
+  )
+```
+
