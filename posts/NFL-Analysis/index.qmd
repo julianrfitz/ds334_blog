@@ -4,7 +4,9 @@ format: html
 categories: [sports, football, analysis]
 date: "2026-02-3"
 ---
+How does change in ownership of an NFL impact the team?
 
+If we take every team and look at how many wins they had each season, we can see how well each team did each season.
 ```{r}
 #| include: false
 library(nflfastR)
@@ -32,14 +34,25 @@ historical_wins_df <- games_df |>
 season_wins <- historical_wins_df |> group_by(winner, season) |> summarise(wins = n()) |> filter(winner != "tie") |> rename(team = winner)
 ```
 
-Historical wins
-
+First, lets look at how many times teams have won
 ```{r}
 #| echo: false
 ggplot(season_wins, aes(x = season, y = wins, group = team)) +
   geom_line(alpha = 0.2) +
   theme_minimal()
 ```
+This isn't a very helpful visualization on its own but I want to have this here as multiple later visuals are based on this.
+
+Let's take this data and look at it by team using a violin plot.
+```{r}
+#| echo: false
+ggplot(season_wins, aes(x = team, y = wins)) +
+  geom_violin() +
+  theme_minimal() +
+  coord_flip()
+```
+You see little some teams have clumps lower than each other but we need to see this information through time to be able to see if change in ownership was beneficial
+
 
 ```{r}
 #| include: false
@@ -85,6 +98,8 @@ recently_sold_history <- left_join(season_wins, sales_df, by = "team") |>
   filter(season != 2026)
 
 ```
+
+To see this, lets take the first plot and highlight each team after they were sold. This is much more helpful than before. You can see the LA Rams have been on a steep upword trend after their acquisition, contrasting this, the Miami Dolphins haven't been doing great since their sale in 2008. But how can we see if these teams have been improving since selling?
 
 ```{r plot: team recor after change in ownership}
 #| echo: false
@@ -150,6 +165,8 @@ new_records_df <- team_sales_record_df |> filter(team %in% c("BUF", "CAR", "CLE"
                    ))
 ```
 
+Lets also add linear smoothers for before sale (green), and after sale (red), to see if teams are improving.
+
 ```{r plot: team record before and after change in ownership}
 #| echo: false
 #| warning: false
@@ -175,6 +192,21 @@ ggplot(team_sales_record_df, aes(x = season, y = wins, group = team)) +
     linewidth = 2.75,
     alpha = 0.2) +
   
+  # before
+  geom_smooth(data = old_records_df,
+              method = lm,
+              se = TRUE,
+              color = "green3",
+              linewidth = 2.5,
+              aes(group = NULL)) + 
+  # after
+  geom_smooth(data = new_records_df,
+              method = lm,
+              se = TRUE,
+              color = "red",
+              linewidth = 2.5,
+              aes(group = NULL)) +
+  
   # use colors in a cell
   scale_color_identity(
     guide = "legend",
@@ -184,11 +216,15 @@ ggplot(team_sales_record_df, aes(x = season, y = wins, group = team)) +
   
   theme_minimal() +
   labs(
-    caption = "Dots mark year sold",
+    caption = "Dots mark year sold. red smoother: after sale, green smoother: before sale",
     title = "Team record before and after change in ownership",
     color = "Team Color"
   )
 ```
+
+We can see clearly now that teams after selling have an upward trend whereas before selling, they tended to be stagnant.
+
+Now, lets look at if each team improved since selling, or have some struggled?
 
 ```{r}
 #| echo: false
@@ -233,8 +269,8 @@ ggplot(old_records_df, aes(x = season, y = wins)) +
   geom_smooth(data = new_records_df,
               method = lm ,
               se = FALSE, 
-              color = "green3",
-              linewidth = 2.5) + # linear smoother for after sale
+              color = "red",
+              linewidth = 2.5) +
   
   facet_wrap(~ team, ncol = 2, scales = "free") +
   theme_void() +
@@ -243,3 +279,4 @@ ggplot(old_records_df, aes(x = season, y = wins)) +
     labels = unique(old_records_df$team)
   )
 ```
+

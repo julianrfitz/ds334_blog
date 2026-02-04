@@ -153,7 +153,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Historical wins</p>
+<p>How does change in ownership of an NFL impact the team?</p>
+<p>If we take every team and look at how many wins they had each season, we can see how well each team did each season.</p>
+<p>First, lets look at how many times teams have won</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -163,6 +165,19 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>This isn’t a very helpful visualization on its own but I want to have this here as multiple later visuals are based on this.</p>
+<p>Let’s take this data and look at it by team using a violin plot.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You see little some teams have clumps lower than each other but we need to see this information through time to be able to see if change in ownership was beneficial</p>
+<p>To see this, lets take the first plot and highlight each team after they were sold. This is much more helpful than before. You can see the LA Rams have been on a steep upword trend after their acquisition, contrasting this, the Miami Dolphins haven’t been doing great since their sale in 2008. But how can we see if these teams have been improving since selling?</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -173,6 +188,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>IS SELLING A TEAM GOOD FOR THEIR RECORD</p>
+<p>Lets also add linear smoothers for before sale (green), and after sale (red), to see if teams are improving.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -182,11 +198,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>We can see clearly now that teams after selling have an upward trend whereas before selling, they tended to be stagnant.</p>
+<p>Now, lets look at if each team improved since selling, or have some struggled?</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
