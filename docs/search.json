@@ -7,6 +7,27 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
+    "objectID": "posts/NFL-Analysis/index.html",
+    "href": "posts/NFL-Analysis/index.html",
+    "title": "NFL Analysis",
+    "section": "",
+    "text": "Historical wins\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIS SELLING A TEAM GOOD FOR THEIR RECORD"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ds334_blog",
+    "section": "",
+    "text": "NFL Analysis\n\n\n\nsports\n\nfootball\n\nanalysis\n\n\n\n\n\n\n\n\n\nFeb 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHockey Game Prediction\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nSimple college hockey dashboard with game outcome prediction\n\n\n\n\n\nJan 28, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 28, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 25, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
     "objectID": "posts/College Hockey/index.html",
     "href": "posts/College Hockey/index.html",
     "title": "Hockey Game Prediction",
@@ -21,31 +42,10 @@
     "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nPrinceton University Goalies"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ds334_blog",
-    "section": "",
-    "text": "Super Bowl Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHockey Game Prediction\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nSimple college hockey dashboard with game outcome prediction\n\n\n\n\n\nJan 28, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 28, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 25, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "posts/post-with-code/index.html",
     "href": "posts/post-with-code/index.html",
     "title": "Post With Code",
     "section": "",
     "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "posts/SuperBowl-Analysis/index.html",
-    "href": "posts/SuperBowl-Analysis/index.html",
-    "title": "Super Bowl Analysis",
-    "section": "",
-    "text": "Historical wins\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIS SELLING A TEAM GOOD FOR THEIR RECORD"
   }
 ]

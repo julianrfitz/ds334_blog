@@ -10,7 +10,64 @@
 <atom:link href="https://your-website-url.example.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>A blog built with Quarto</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Wed, 28 Jan 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 03 Feb 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>NFL Analysis</title>
+  <link>https://your-website-url.example.com/posts/NFL-Analysis/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Historical wins</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/NFL-Analysis/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/NFL-Analysis/index_files/figure-html/plot- team recor after change in ownership-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>IS SELLING A TEAM GOOD FOR THEIR RECORD</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/NFL-Analysis/index_files/figure-html/plot- team record before and after change in ownership-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/NFL-Analysis/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>sports</category>
+  <category>football</category>
+  <category>analysis</category>
+  <guid>https://your-website-url.example.com/posts/NFL-Analysis/</guid>
+  <pubDate>Tue, 03 Feb 2026 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Hockey Game Prediction</title>
   <dc:creator>Julian Fitz</dc:creator>
@@ -214,60 +271,6 @@ font-style: inherit;">1</span></span></code></pre></div></div>
   <category>news</category>
   <guid>https://your-website-url.example.com/posts/welcome/</guid>
   <pubDate>Sun, 25 Jan 2026 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Super Bowl Analysis</title>
-  <link>https://your-website-url.example.com/posts/SuperBowl-Analysis/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Historical wins</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://your-website-url.example.com/posts/SuperBowl-Analysis/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://your-website-url.example.com/posts/SuperBowl-Analysis/index_files/figure-html/plot- team recor after change in ownership-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>IS SELLING A TEAM GOOD FOR THEIR RECORD</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://your-website-url.example.com/posts/SuperBowl-Analysis/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://your-website-url.example.com/posts/SuperBowl-Analysis/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <guid>https://your-website-url.example.com/posts/SuperBowl-Analysis/</guid>
-  <pubDate>Wed, 04 Feb 2026 04:23:03 GMT</pubDate>
 </item>
 </channel>
 </rss>

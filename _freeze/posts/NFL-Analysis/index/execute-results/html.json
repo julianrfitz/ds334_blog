@@ -1,0 +1,17 @@
+{
+  "hash": "b11449d78210c760c7ad1fdf71347745",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"NFL Analysis\"\nformat: html\ncategories: [sports, football, analysis]\ndate: \"2026-02-3\"\n---\n\n\n\n\n\nHistorical wins\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/plot- team recor after change in ownership-1.png){width=672}\n:::\n:::\n\n\nIS SELLING A TEAM GOOD FOR THEIR RECORD\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/plot- team record before and after change in ownership-1.png){width=672}\n:::\n:::\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
