@@ -28,7 +28,7 @@ source(here("Scripts/loadRanks.R"))
 # url <- "https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/"
 url <- "https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/"
 home_team <- "St. Lawrence University"
-away_team <- "Princeton University"
+away_team <- "Union College"
 ```
 
 ```{r}
@@ -223,7 +223,7 @@ team_map <- tibble(
     "CLA","CLG","COL","COR","DAR","DEN","FSU","HAR","HCR","LIN",
     "LIU","LSS","MHU","MIS","MIT","MMC","MNS","MOH","NDM","NEA",
     "NEO","NIA","NMU","OHS","PRI","PRO","PSS","QUI","RIT","RMR",
-    "RPI","SCU","SHU","SLU","STO","UST","UAA","UAF","UCN","UMA",
+    "RPI","SCU","SHU","SLU","STO","UST","UAA","UAF","UNC","UMA",
     "UMD","UME","UMI","UML","UMN","UNC","UND","UNH", "USNTDP","UVT",
     "UWI","WMI","YAL", "ARM","MTU","UNO","SFU","UCT"
   ),
@@ -482,8 +482,8 @@ ratings_plot <- ratings |> arrange(rank) |> slice(1:65) |> mutate(oscho = team) 
 
 #  "https://www.quanthockey.com/ncaa/en/seasons/ncaa-goalies-stats.html",
 
-goalies_df1 <- read_xlsx(here("Data/QuantHockey_1_31_2026_1.xlsx"), skip = 1, sheet = 2)
-goalies_df2 <- read_xlsx(here("Data/QuantHockey_1_31_2026_2.xlsx"), skip = 1, sheet = 2)
+goalies_df1 <- read_xlsx(here("Data/QuantHockey_2_6_2026_1.xlsx"), skip = 1, sheet = 2)
+goalies_df2 <- read_xlsx(here("Data/QuantHockey_2_6_2026_2.xlsx"), skip = 1, sheet = 2)
 # combine files
 goalies_df <- goalies_df1 |> bind_rows(goalies_df2) |> rename(SVPrct = `SV%`)
 
@@ -547,9 +547,9 @@ away_name <- throwaway_goalies_df |> filter(type == "Away") |> slice(1) |> pull(
 ```
 
 ```{r}
-throwaway_home_df <- ratings_plot |> filter(FullName == home_team) |> mutate(Team = FullName)
+throwaway_home_df <- ratings_plot |> filter(FullName == home_team) |> mutate(Team = FullName, home_team = FullName)
 
-throwaway_away_df <- ratings_plot |> filter(FullName == away_team) |> mutate(Team = FullName)
+throwaway_away_df <- ratings_plot |> filter(FullName == away_team) |> mutate(Team = FullName, away_team = FullName)
 ```
 
 # Power / Ability
@@ -563,13 +563,13 @@ p1 <- ggplot(ratings_plot, aes(x = FullName, y = power)) +
   geom_point(color = "grey20") +
   geom_point(
     data = throwaway_home_df,
-    aes(color = home_name),
+    aes(color = home_team),
     size = 5,
     alpha = 0.5
   ) +
   geom_point(
     data = throwaway_away_df,
-    aes(color = away_name),
+    aes(color = away_team),
     size = 5,
     alpha = 0.5
   ) +
@@ -583,16 +583,16 @@ p1 <- ggplot(ratings_plot, aes(x = FullName, y = power)) +
         ) +
   scale_color_manual(
     name   = NULL,
-    values = setNames(c("green", "red"), c(home_name, away_name))
+    values = setNames(c("green", "red"), c(home_team, away_team))
   ) +
   labs(caption = " ")
 
 p2 <- ggplot(ratings_plot, aes(x = team, y = ability)) +
   geom_col() +
   geom_col(data = throwaway_away_df,
-           aes(fill = away_name)) +
+           aes(fill = away_team)) +
   geom_col(data = throwaway_home_df,
-           aes(fill = home_name)) +
+           aes(fill = home_team)) +
   coord_flip() + 
   theme_bw() +
   ylab("Ability") +
@@ -604,7 +604,7 @@ p2 <- ggplot(ratings_plot, aes(x = team, y = ability)) +
   labs(caption = "Only the top 65 teams are visualized here as the lower 20 are significantly lower than every other team and have very little data.") +
   scale_fill_manual(
     name = NULL,
-    values = setNames(c("green", "red"), c(home_name, away_name))
+    values = setNames(c("green", "red"), c(home_team, away_team))
   )
 
 grid.arrange(p1, p2, ncol = 2)
@@ -630,23 +630,23 @@ ggplot(throwaway_goalies_df, aes(x = GSAA, y = SVPrct)) +
   ) +
   geom_point(
     data = subset(throwaway_goalies_df, type == "Home"),
-    aes(color = home_name, size = GP)
+    aes(color = home_team, size = GP)
   ) +
   geom_point(
     data = subset(throwaway_goalies_df, type == "Away"),
-    aes(color = away_name, size = GP)
+    aes(color = away_team, size = GP)
   ) +
   # text labels next to those colored points
   geom_text(
     data = label_df,
     aes(label = Name),
-    nudge_y = 0.015, # adjust until it looks right
-    nudge_x = 0, # or a small +/- to move left/right
+    nudge_y = 0.015, 
+    nudge_x = 0,
     show.legend = FALSE
   ) +
   scale_color_manual(
     name   = NULL,
-    values = setNames(c("green", "red"), c(home_name, away_name))
+    values = setNames(c("green", "red"), c(home_team, away_team))
   ) +
   theme_bw() +
   labs(

@@ -119,26 +119,26 @@ font-style: inherit;">"St. Lawrence University"</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Princeton University"</span></span></code></pre></div></div>
+font-style: inherit;">"Union College"</span></span></code></pre></div></div>
 </div>
 </section>
 <section id="outcome-prediction" class="level1">
 <h1>Outcome Prediction</h1>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of St. Lawrence University win:  0.09515896 </code></pre>
+<pre><code>Probability of St. Lawrence University win:  0.09025807 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>St. Lawrence University Expected Goals:  1.880149 </code></pre>
+<pre><code>St. Lawrence University Expected Goals:  2.077115 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of Princeton University win:  0.8048577 </code></pre>
+<pre><code>Probability of Union College win:  0.8114274 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Princeton University Expected Goals:  4.613852 </code></pre>
+<pre><code>Union College Expected Goals:  5.045386 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of a tie:  0.09203802</code></pre>
+<pre><code>Probability of a tie:  0.08376587</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -156,7 +156,9 @@ font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">Team =</span> FullName)</span>
+font-style: inherit;">Team =</span> FullName, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">home_team =</span> FullName)</span>
 <span id="cb7-2"></span>
 <span id="cb7-3">throwaway_away_df <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -172,7 +174,9 @@ font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">Team =</span> FullName)</span></code></pre></div></div>
+font-style: inherit;">Team =</span> FullName, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">away_team =</span> FullName)</span></code></pre></div></div>
 </div>
 </section>
 <section id="power-ability" class="level1">
@@ -203,15 +207,15 @@ font-style: inherit;">Team =</span> FullName)</span></code></pre></div></div>
 <p><strong>St.&nbsp;Lawrence University Goalies</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-02368cdd428c0387c436" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-02368cdd428c0387c436">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[49,82,104],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[15,9,5],"SVPrct":[0.873,0.883,0.903],"W":[2,0,1],"L":[11,7,3],"GA":[57,37,18],"SV":[392,278,168],"SOG":[449,315,186],"TIME":[840,493,272],"GSAA":[-10.001,-4.027,1.47],"relative_save_prct":[-0.013,-0.003,0.017]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"ee6c93340849a9e25859b6a091eb9d48"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-f39253842a69598cb8b8" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f39253842a69598cb8b8">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[53,87,101],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[15,9,6],"SVPrct":[0.873,0.883,0.904],"W":[2,0,2],"L":[11,7,3],"GA":[57,37,20],"SV":[392,278,189],"SOG":[449,315,209],"TIME":[840,493,332],"GSAA":[-10.651,-4.483,1.575],"relative_save_prct":[-0.014,-0.004,0.017]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"7f35b498da2c75913e4a2dfa7ac3d980"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p><strong>Princeton University Goalies</strong></p>
+<p><strong>Union College Goalies</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-cc1d3556998615cc3e8b" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-cc1d3556998615cc3e8b">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[75,80,133],"Name":["Conor Callaghan","Arthur Smith","Daniel Moor"],"Age":[22,21,19],"GP":[11,10,2],"SVPrct":[0.906,0.913,0.852],"W":[7,5,0],"L":[2,5,1],"GA":[23,24,4],"SV":[221,253,23],"SOG":[244,277,27],"TIME":[588,584,85],"GSAA":[2.541,4.995,-1.174],"relative_save_prct":[0.016,0.023,-0.038]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"e71d389b3479c7119fa6c6e9c0a6b0f2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-eb1a883e754cc07c7e24" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-eb1a883e754cc07c7e24">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[42,76,141],"Name":["Cameron Korpi","Brayden Gillespie","Brendan Holahan"],"Age":[21,20,21],"GP":[17,11,2],"SVPrct":[0.898,0.925,1],"W":[9,6,0],"L":[6,3,0],"GA":[38,19,0],"SV":[333,236,3],"SOG":[371,255,3],"TIME":[960,592,6],"GSAA":[0.298,7.323,0.31],"relative_save_prct":[-0.043,-0.016,0.059]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"03b3b92440d40b743bf06f580db850fc"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">

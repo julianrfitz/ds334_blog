@@ -32,14 +32,14 @@
     "href": "posts/College Hockey/index.html",
     "title": "Hockey Game Prediction",
     "section": "",
-    "text": "# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Princeton University\""
+    "text": "# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Union College\""
   },
   {
     "objectID": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
     "href": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
     "title": "Hockey Game Prediction",
     "section": "Identifying performance of goalie relative to teams",
-    "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nPrinceton University Goalies"
+    "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nUnion College Goalies"
   },
   {
     "objectID": "posts/post-with-code/index.html",
