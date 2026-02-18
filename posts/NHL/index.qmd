@@ -1,0 +1,158 @@
+---
+title: "NHL Analysis"
+author: "Julian Fitz"
+date: "2026-02-18"
+categories: [sports, hockey, analysis]
+description: "A simple analysis of NHL team perfomance"
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(here)
+library(broom)
+library(gridExtra)
+
+## data from moneypuck.com
+teams_df <- read_csv(here("Data/moneypuck_teams_20252026.csv"))
+
+```
+
+It is currently olympic hockey season, which means a hiatus from the regular NHL season as the best players fight it out for a Gold medal. This is a pivotal time for teams to be looking at other NHL teams performance and likely playoff brackets.
+
+Lets first look at the league as a whole, to see who the big contenders are. Moneypuck.com is an extremely comprehensive NHL statistics project by Peter Tanner, with many useful already calculated statistics like expected goals for each situation.
+
+```{r}
+#| echo: false
+# teams expected to score the most while on a penality kill
+#shorthand_df <- teams_df |> filter(situation == "4on5") |>
+#  mutate(xGoalsPeriodShort = xGoalsFor / (iceTime / 20)) |>
+#  select(name, xGoalsPeriodShort)
+
+#powerplay_df <- teams_df |> filter(situation == "5on4") |>
+#  mutate(xGoalsPeriodPower = xGoalsFor / (iceTime / 20)) |>
+#  select(name, xGoalsPeriodPower)
+
+goalDif_df <- teams_df |> filter(situation == "all") |>
+  mutate(xGoalDif = xGoalsFor - xGoalsAgainst) |>
+  mutate(name = fct_reorder(name, xGoalDif))
+
+# pk_df <- left_join(shorthand_df, powerplay_df, by = "name")
+
+
+ggplot(goalDif_df, aes(x = name, y = xGoalDif)) +
+  theme_minimal() +
+  labs(title = "Season Expected Goal Differential",
+       x = "Team",
+       y = "Expected Goal Differential",
+       caption = "data sourced from moneypuck.com") +
+  geom_segment(aes(xend = name, yend = 0, color = xGoalDif)) +
+  coord_flip() +
+  geom_point() +
+  scale_color_gradient2(low = "red4", mid = "yellow4", high = "green4")
+```
+
+These are the teams sorted by how many more goals they are expected to score than than their opponent. Colorado unsurprisingly has the highest expected goal differential, which isn't at all surprising as they had a very dominant start to the season. I am a little surprised that teams like Florida are as high as they are as they have struggled this season despite their previous two years of postseason success. While coloring is not at all necessary here in this diverging lollipop plot, it does make it even clearer that a a high expected goal differential is better as it is green, helping those who may not have an extremely detailed hockey understanding to interperet this.
+
+This is all useful to look at the league as a whole, but lets rank these by division as teams compete within their division in the playoffs.
+
+```{r}
+#| echo: false
+## AI USED HERE
+## prompt: create a tibble of the nhl divisions for each team using their 3 letter code
+## model: Perplexity Sonar
+
+team_map <- tibble(
+  name = c(
+    "CAR","CBJ","NJD","NYR","NYI","PHI","PIT","WSH", ## met
+    "BOS","BUF","DET","FLA","MTL","OTT","TBL","TOR", ## atl
+    "CHI","COL","DAL","MIN","NSH","STL","UTA","WPG", ## cent
+    "ANA","CGY","EDM","LAK","SJS","SEA","VAN","VGK"  ## pac
+  ),
+  division = c(
+    rep("Metropolitan", 8),
+    rep("Atlantic", 8),
+    rep("Central", 8),
+    rep("Pacific", 8)
+  )
+)
+
+divisionDif_df <- left_join(goalDif_df, team_map, by = "name")
+
+divisionDif_df <- divisionDif_df |>
+  mutate(name = fct_reorder(name, xGoalDif)) |>
+  select(division, name, xGoalDif) |> group_by(division) |>
+  mutate(division_avg = mean(xGoalDif))
+
+p1 <- ggplot(subset(divisionDif_df, division == "Metropolitan"), 
+             aes(x = name, y = xGoalDif, color = (xGoalDif - division_avg))) +
+  geom_segment(aes(x = name, y = division_avg, yend = xGoalDif)) + 
+  geom_point() +
+  geom_hline(aes(yintercept = division_avg)) +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Metropolitan Division",
+    x = "Team",
+    y = "Season Expected Goal Differential"
+  ) +
+  theme(
+    legend.position = "none"
+  ) +
+  scale_color_gradient2(low = "red4", mid = "yellow4", high = "green4")
+
+p2 <- ggplot(subset(divisionDif_df, division == "Atlantic"),
+             aes(x = name, y = xGoalDif, color = (xGoalDif - division_avg))) +
+  geom_segment(aes(x = name, y = division_avg, yend = xGoalDif)) + 
+  geom_point() +
+  geom_hline(aes(yintercept = division_avg)) +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Atlantic Division",
+    x = "Team",
+    y = "Season Expected Goal Differential"
+  ) +
+  theme(
+    legend.position = "none"
+  ) +
+  scale_color_gradient2(low = "red4", mid = "yellow4", high = "green4")
+
+p3 <- ggplot(subset(divisionDif_df, division == "Central"),
+             aes(x = name, y = xGoalDif, color = (xGoalDif - division_avg))) +
+  geom_segment(aes(x = name, y = division_avg, yend = xGoalDif)) + 
+  geom_point() +
+  geom_hline(aes(yintercept = division_avg)) +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Central Division",
+    x = "Team",
+    y = "Season Expected Goal Differential"
+  ) +
+  theme(
+    legend.position = "none"
+  ) +
+  scale_color_gradient2(low = "red4", mid = "yellow4", high = "green4")
+
+p4 <- ggplot(subset(divisionDif_df, division == "Pacific"),
+             aes(x = name, y = xGoalDif, color = (xGoalDif - division_avg))) +
+  geom_segment(aes(x = name, y = division_avg, yend = xGoalDif)) + 
+  geom_point() +
+  geom_hline(aes(yintercept = division_avg)) +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Pacific Division",
+    x = "Team",
+    y = "Season Expected Goal Differential"
+  ) +
+  theme(
+    legend.position = "none"
+  ) +
+   scale_color_gradient2(low = "red4", mid = "yellow4", high = "green4")
+
+grid.arrange(p1, p2, p3, p4)
+```
+
+Now we can see that even though the Vegas Golden Knights are 4th in the league for expeted goal differential, they are top of the pacific division, meaning that by this metric, they are are the most powerful team in their division, and would be the favorite to beat whoever they match up with in the first round. While color could be used to show divisions, it is much clearer when comparing within the division when the division is instead used to facet. Because of this, I have yet again used a diverging color scheme to help the reader understand that having a higher expected goal differential is better.

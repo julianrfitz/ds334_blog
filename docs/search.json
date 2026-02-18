@@ -7,18 +7,25 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-    "objectID": "posts/NFL-Analysis/index.html",
-    "href": "posts/NFL-Analysis/index.html",
-    "title": "NFL Analysis",
+    "objectID": "posts/NHL/index.html",
+    "href": "posts/NHL/index.html",
+    "title": "NHL Analysis",
     "section": "",
-    "text": "How does change in ownership of an NFL impact the team?\nIf we take every team and look at how many wins they had each season, we can see how well each team did each season.\nFirst, lets look at how many times teams have won\n\n\n\n\n\n\n\n\n\nThis isn’t a very helpful visualization on its own but I want to have this here as multiple later visuals are based on this.\nLet’s take this data and look at it by team using a violin plot.\n\n\n\n\n\n\n\n\n\nYou see little some teams have clumps lower than each other but we need to see this information through time to be able to see if change in ownership was beneficial\nTo see this, lets take the first plot and highlight each team after they were sold. Lets also use team colors instead of a sequential or diverging theme. This is much more helpful than before. You can see the LA Rams have been on a steep upword trend after their acquisition, contrasting this, the Miami Dolphins haven’t been doing great since their sale in 2008. But how can we see if these teams have been improving since selling?\n\n\n\n\n\n\n\n\n\nIS SELLING A TEAM GOOD FOR THEIR RECORD\nLets also add linear smoothers for before sale (green), and after sale (red), to see if teams are improving.\n\n\n\n\n\n\n\n\n\nWe can see clearly now that teams after selling have an upward trend whereas before selling, they tended to be stagnant.\nNow, lets look at if each team improved since selling, or have some struggled?\n\n\n\n\n\n\n\n\n\nNow we can see for each team that has sold in recent NFL history what teams have improved since selling. There is a clear trend that almost every team has a much steeper upward trajectory after sale. Why could this be? My speculation is owners sell the team when they lose interest. A new owner means renewed interest in the team financially and a general committment to better the team."
+    "text": "It is currently olympic hockey season, which means a hiatus from the regular NHL season as the best players fight it out for a Gold medal. This is a pivotal time for teams to be looking at other NHL teams performance and likely playoff brackets.\nLets first look at the league as a whole, to see who the big contenders are. Moneypuck.com is an extremely comprehensive NHL statistics project by Peter Tanner, with many useful already calculated statistics like expected goals for each situation.\n\n\n\n\n\n\n\n\n\nThese are the teams sorted by how many more goals they are expected to score than than their opponent. Colorado unsurprisingly has the highest expected goal differential, which isn’t at all surprising as they had a very dominant start to the season. I am a little surprised that teams like Florida are as high as they are as they have struggled this season despite their previous two years of postseason success. While coloring is not at all necessary here in this diverging lollipop plot, it does make it even clearer that a a high expected goal differential is better as it is green, helping those who may not have an extremely detailed hockey understanding to interperet this.\nThis is all useful to look at the league as a whole, but lets rank these by division as teams compete within their division in the playoffs.\n\n\n\n\n\n\n\n\n\nNow we can see that even though the Vegas Golden Knights are 4th in the league for expeted goal differential, they are top of the pacific division, meaning that by this metric, they are are the most powerful team in their division, and would be the favorite to beat whoever they match up with in the first round. While color could be used to show divisions, it is much clearer when comparing within the division when the division is instead used to facet. Because of this, I have yet again used a diverging color scheme to help the reader understand that having a higher expected goal differential is better."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ds334_blog",
+    "objectID": "posts/College Hockey/index.html",
+    "href": "posts/College Hockey/index.html",
+    "title": "Hockey Game Prediction",
     "section": "",
-    "text": "NFL Analysis\n\n\n\nsports\n\nfootball\n\nanalysis\n\n\n\n\n\n\n\n\n\nFeb 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHockey Game Prediction\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nSimple college hockey dashboard with game outcome prediction\n\n\n\n\n\nJan 28, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 28, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 25, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
+    "text": "# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Brown University\""
+  },
+  {
+    "objectID": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
+    "href": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
+    "title": "Hockey Game Prediction",
+    "section": "Identifying performance of goalie relative to teams",
+    "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nBrown University Goalies"
   },
   {
     "objectID": "about.html",
@@ -28,18 +35,18 @@
     "text": "About this blog"
   },
   {
-    "objectID": "posts/College Hockey/index.html",
-    "href": "posts/College Hockey/index.html",
-    "title": "Hockey Game Prediction",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ds334_blog",
     "section": "",
-    "text": "# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Union College\""
+    "text": "NHL Analysis\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nA simple analysis of NHL team perfomance\n\n\n\n\n\nFeb 18, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nNFL Analysis\n\n\n\nsports\n\nfootball\n\nanalysis\n\n\n\n\n\n\n\n\n\nFeb 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHockey Game Prediction\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nSimple college hockey dashboard with game outcome prediction\n\n\n\n\n\nJan 28, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 28, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 25, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
-    "href": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
-    "title": "Hockey Game Prediction",
-    "section": "Identifying performance of goalie relative to teams",
-    "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nUnion College Goalies\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNow we can see for each team that has sold in recent NFL history what teams have improved since selling. There is a clear trend that almost every team has a much steeper upward trajectory after sale. Why could this be? My speculation is owners sell the team when they lose interest. A new owner means renewed interest in the team financially and a general committment to better the team."
+    "objectID": "posts/NFL-Analysis/index.html",
+    "href": "posts/NFL-Analysis/index.html",
+    "title": "NFL Analysis",
+    "section": "",
+    "text": "How does change in ownership of an NFL impact the team?\nIf we take every team and look at how many wins they had each season, we can see how well each team did each season.\nFirst, lets look at how many times teams have won\n\n\n\n\n\n\n\n\n\nThis isn’t a very helpful visualization on its own but I want to have this here as multiple later visuals are based on this.\nLet’s take this data and look at it by team using a violin plot.\n\n\n\n\n\n\n\n\n\nYou see little some teams have clumps lower than each other but we need to see this information through time to be able to see if change in ownership was beneficial\nTo see this, lets take the first plot and highlight each team after they were sold. Lets also use team colors instead of a sequential or diverging theme. This is much more helpful than before. You can see the LA Rams have been on a steep upword trend after their acquisition, contrasting this, the Miami Dolphins haven’t been doing great since their sale in 2008. But how can we see if these teams have been improving since selling?\n\n\n\n\n\n\n\n\n\nIS SELLING A TEAM GOOD FOR THEIR RECORD\nLets also add linear smoothers for before sale (green), and after sale (red), to see if teams are improving.\n\n\n\n\n\n\n\n\n\nWe can see clearly now that teams after selling have an upward trend whereas before selling, they tended to be stagnant.\nNow, lets look at if each team improved since selling, or have some struggled?\n\n\n\n\n\n\n\n\n\nNow we can see for each team that has sold in recent NFL history what teams have improved since selling. There is a clear trend that almost every team has a much steeper upward trajectory after sale. Why could this be? My speculation is owners sell the team when they lose interest. A new owner means renewed interest in the team financially and a general committment to better the team."
   },
   {
     "objectID": "posts/post-with-code/index.html",

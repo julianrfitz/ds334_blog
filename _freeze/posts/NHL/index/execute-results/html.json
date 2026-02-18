@@ -1,0 +1,17 @@
+{
+  "hash": "e9e7836fb50383ad4aba7cb2bf3429ca",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"NHL Analysis\"\nauthor: \"Julian Fitz\"\ndate: \"2026-02-18\"\ncategories: [sports, hockey, analysis]\ndescription: \"A simple analysis of NHL team perfomance\"\n---\n\n\n\nIt is currently olympic hockey season, which means a hiatus from the regular NHL season as the best players fight it out for a Gold medal. This is a pivotal time for teams to be looking at other NHL teams performance and likely playoff brackets.\n\nLets first look at the league as a whole, to see who the big contenders are. Moneypuck.com is an extremely comprehensive NHL statistics project by Peter Tanner, with many useful already calculated statistics like expected goals for each situation.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\nThese are the teams sorted by how many more goals they are expected to score than than their opponent. Colorado unsurprisingly has the highest expected goal differential, which isn't at all surprising as they had a very dominant start to the season. I am a little surprised that teams like Florida are as high as they are as they have struggled this season despite their previous two years of postseason success. While coloring is not at all necessary here in this diverging lollipop plot, it does make it even clearer that a a high expected goal differential is better as it is green, helping those who may not have an extremely detailed hockey understanding to interperet this.\n\nThis is all useful to look at the league as a whole, but lets rank these by division as teams compete within their division in the playoffs.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\nNow we can see that even though the Vegas Golden Knights are 4th in the league for expeted goal differential, they are top of the pacific division, meaning that by this metric, they are are the most powerful team in their division, and would be the favorite to beat whoever they match up with in the first round. While color could be used to show divisions, it is much clearer when comparing within the division when the division is instead used to facet. Because of this, I have yet again used a diverging color scheme to help the reader understand that having a higher expected goal differential is better.",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

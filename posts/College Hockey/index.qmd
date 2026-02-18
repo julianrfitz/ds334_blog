@@ -28,7 +28,7 @@ source(here("Scripts/loadRanks.R"))
 # url <- "https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/"
 url <- "https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/"
 home_team <- "St. Lawrence University"
-away_team <- "Union College"
+away_team <- "Brown University"
 ```
 
 ```{r}
@@ -872,5 +872,3 @@ ggplot(npi_tagged, aes(x = season, y = rank, group = team)) +
     panel.grid.minor = element_blank()
   )
 ```
-
-Now we can see for each team that has sold in recent NFL history what teams have improved since selling. There is a clear trend that almost every team has a much steeper upward trajectory after sale. Why could this be? My speculation is owners sell the team when they lose interest. A new owner means renewed interest in the team financially and a general committment to better the team.

@@ -10,7 +10,50 @@
 <atom:link href="https://your-website-url.example.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>A blog built with Quarto</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Tue, 03 Feb 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 18 Feb 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>NHL Analysis</title>
+  <dc:creator>Julian Fitz</dc:creator>
+  <link>https://your-website-url.example.com/posts/NHL/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>It is currently olympic hockey season, which means a hiatus from the regular NHL season as the best players fight it out for a Gold medal. This is a pivotal time for teams to be looking at other NHL teams performance and likely playoff brackets.</p>
+<p>Lets first look at the league as a whole, to see who the big contenders are. Moneypuck.com is an extremely comprehensive NHL statistics project by Peter Tanner, with many useful already calculated statistics like expected goals for each situation.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/NHL/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These are the teams sorted by how many more goals they are expected to score than than their opponent. Colorado unsurprisingly has the highest expected goal differential, which isn’t at all surprising as they had a very dominant start to the season. I am a little surprised that teams like Florida are as high as they are as they have struggled this season despite their previous two years of postseason success. While coloring is not at all necessary here in this diverging lollipop plot, it does make it even clearer that a a high expected goal differential is better as it is green, helping those who may not have an extremely detailed hockey understanding to interperet this.</p>
+<p>This is all useful to look at the league as a whole, but lets rank these by division as teams compete within their division in the playoffs.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/NHL/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we can see that even though the Vegas Golden Knights are 4th in the league for expeted goal differential, they are top of the pacific division, meaning that by this metric, they are are the most powerful team in their division, and would be the favorite to beat whoever they match up with in the first round. While color could be used to show divisions, it is much clearer when comparing within the division when the division is instead used to facet. Because of this, I have yet again used a diverging color scheme to help the reader understand that having a higher expected goal differential is better.</p>
+
+
+
+ ]]></description>
+  <category>sports</category>
+  <category>hockey</category>
+  <category>analysis</category>
+  <guid>https://your-website-url.example.com/posts/NHL/</guid>
+  <pubDate>Wed, 18 Feb 2026 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>NFL Analysis</title>
   <link>https://your-website-url.example.com/posts/NFL-Analysis/</link>
@@ -120,26 +163,26 @@ font-style: inherit;">"St. Lawrence University"</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Union College"</span></span></code></pre></div></div>
+font-style: inherit;">"Brown University"</span></span></code></pre></div></div>
 </div>
 </section>
 <section id="outcome-prediction" class="level1">
 <h1>Outcome Prediction</h1>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of St. Lawrence University win:  0.09025807 </code></pre>
+<pre><code>Probability of St. Lawrence University win:  0.3411553 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>St. Lawrence University Expected Goals:  2.077115 </code></pre>
+<pre><code>St. Lawrence University Expected Goals:  2.848513 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of Union College win:  0.8114274 </code></pre>
+<pre><code>Probability of Brown University win:  0.4971249 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Union College Expected Goals:  5.045386 </code></pre>
+<pre><code>Brown University Expected Goals:  3.350111 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of a tie:  0.08376587</code></pre>
+<pre><code>Probability of a tie:  0.1608107</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -208,15 +251,15 @@ font-style: inherit;">away_team =</span> FullName)</span></code></pre></div></di
 <p><strong>St.&nbsp;Lawrence University Goalies</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-a66a4efe7bef3735502a" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a66a4efe7bef3735502a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[53,87,101],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[15,9,6],"SVPrct":[0.873,0.883,0.904],"W":[2,0,2],"L":[11,7,3],"GA":[57,37,20],"SV":[392,278,189],"SOG":[449,315,209],"TIME":[840,493,332],"GSAA":[-10.651,-4.483,1.575],"relative_save_prct":[-0.014,-0.004,0.017]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"7f35b498da2c75913e4a2dfa7ac3d980"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-b02f71426add42e0a9b3" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b02f71426add42e0a9b3">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[53,87,101],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[15,9,6],"SVPrct":[0.873,0.883,0.904],"W":[2,0,2],"L":[11,7,3],"GA":[57,37,20],"SV":[392,278,189],"SOG":[449,315,209],"TIME":[840,493,332],"GSAA":[-10.651,-4.483,1.575],"relative_save_prct":[-0.014,-0.004,0.017]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"7f35b498da2c75913e4a2dfa7ac3d980"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p><strong>Union College Goalies</strong></p>
+<p><strong>Brown University Goalies</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-f28346affb64e411d3e0" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f28346affb64e411d3e0">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[42,76,141],"Name":["Cameron Korpi","Brayden Gillespie","Brendan Holahan"],"Age":[21,20,21],"GP":[17,11,2],"SVPrct":[0.898,0.925,1],"W":[9,6,0],"L":[6,3,0],"GA":[38,19,0],"SV":[333,236,3],"SOG":[371,255,3],"TIME":[960,592,6],"GSAA":[0.298,7.323,0.31],"relative_save_prct":[-0.043,-0.016,0.059]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"03b3b92440d40b743bf06f580db850fc"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-b9fcaea3979a688f1a7a" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b9fcaea3979a688f1a7a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[46,95],"Name":["Tyler Shea","Freddie Halyk"],"Age":[24,22],"GP":[17,8],"SVPrct":[0.915,0.89],"W":[2,2],"L":[13,4],"GA":[48,23],"SV":[515,187],"SOG":[563,210],"TIME":[950,358],"GSAA":[10.117,-1.322],"relative_save_prct":[0.012,-0.013]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"7653ef62165839adb29f39f6886bf3a4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
@@ -228,7 +271,6 @@ font-style: inherit;">away_team =</span> FullName)</span></code></pre></div></di
 </div>
 </div>
 </div>
-<p>Now we can see for each team that has sold in recent NFL history what teams have improved since selling. There is a clear trend that almost every team has a much steeper upward trajectory after sale. Why could this be? My speculation is owners sell the team when they lose interest. A new owner means renewed interest in the team financially and a general committment to better the team.</p>
 
 
 </section>
