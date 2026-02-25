@@ -2,7 +2,7 @@
 title: "Hockey Game Prediction"
 author: "Julian Fitz"
 date: "2026-01-28"
-categories: [sports, hockey, analysis]
+categories: [sports, hockey, analysis, personal project]
 description: "Simple college hockey dashboard with game outcome prediction"
 ---
 
@@ -28,7 +28,7 @@ source(here("Scripts/loadRanks.R"))
 # url <- "https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/"
 url <- "https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/"
 home_team <- "St. Lawrence University"
-away_team <- "Brown University"
+away_team <- "Cornell University"
 ```
 
 ```{r}

@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
     "objectID": "posts/NHL/index.html",
     "href": "posts/NHL/index.html",
     "title": "NHL Analysis",
@@ -18,28 +11,28 @@
     "href": "posts/College Hockey/index.html",
     "title": "Hockey Game Prediction",
     "section": "",
-    "text": "# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Brown University\""
+    "text": "# url for the composite schedule (ONLY WORKS WITH USCHO (1/20/2026))\n# url &lt;- \"https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/\"\nurl &lt;- \"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/\"\nhome_team &lt;- \"St. Lawrence University\"\naway_team &lt;- \"Cornell University\""
   },
   {
     "objectID": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
     "href": "posts/College Hockey/index.html#identifying-performance-of-goalie-relative-to-teams",
     "title": "Hockey Game Prediction",
     "section": "Identifying performance of goalie relative to teams",
-    "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nBrown University Goalies"
+    "text": "Identifying performance of goalie relative to teams\n\n\n\n\n\n\n\n\n\nSt. Lawrence University Goalies\n\n\n\n\n\n\nCornell University Goalies"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "Blog for my STAT-334 Data Visualization class"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "ds334_blog",
+    "title": "Data Visualization Blog",
     "section": "",
-    "text": "NHL Analysis\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nA simple analysis of NHL team perfomance\n\n\n\n\n\nFeb 18, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nNFL Analysis\n\n\n\nsports\n\nfootball\n\nanalysis\n\n\n\n\n\n\n\n\n\nFeb 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHockey Game Prediction\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nSimple college hockey dashboard with game outcome prediction\n\n\n\n\n\nJan 28, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 28, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 25, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
+    "text": "NHL Analysis\n\n\n\nsports\n\nhockey\n\nanalysis\n\n\n\nA simple analysis of NHL team perfomance\n\n\n\n\n\nFeb 18, 2026\n\n\nJulian Fitz\n\n\n\n\n\n\n\n\n\n\n\n\nNFL Analysis\n\n\n\nsports\n\nfootball\n\nanalysis\n\n\n\n\n\n\n\n\n\nFeb 3, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHockey Game Prediction\n\n\n\nsports\n\nhockey\n\nanalysis\n\npersonal project\n\n\n\nSimple college hockey dashboard with game outcome prediction\n\n\n\n\n\nJan 28, 2026\n\n\nJulian Fitz\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/NFL-Analysis/index.html",
@@ -47,12 +40,5 @@
     "title": "NFL Analysis",
     "section": "",
     "text": "How does change in ownership of an NFL impact the team?\nIf we take every team and look at how many wins they had each season, we can see how well each team did each season.\nFirst, lets look at how many times teams have won\n\n\n\n\n\n\n\n\n\nThis isn’t a very helpful visualization on its own but I want to have this here as multiple later visuals are based on this.\nLet’s take this data and look at it by team using a violin plot.\n\n\n\n\n\n\n\n\n\nYou see little some teams have clumps lower than each other but we need to see this information through time to be able to see if change in ownership was beneficial\nTo see this, lets take the first plot and highlight each team after they were sold. Lets also use team colors instead of a sequential or diverging theme. This is much more helpful than before. You can see the LA Rams have been on a steep upword trend after their acquisition, contrasting this, the Miami Dolphins haven’t been doing great since their sale in 2008. But how can we see if these teams have been improving since selling?\n\n\n\n\n\n\n\n\n\nIS SELLING A TEAM GOOD FOR THEIR RECORD\nLets also add linear smoothers for before sale (green), and after sale (red), to see if teams are improving.\n\n\n\n\n\n\n\n\n\nWe can see clearly now that teams after selling have an upward trend whereas before selling, they tended to be stagnant.\nNow, lets look at if each team improved since selling, or have some struggled?\n\n\n\n\n\n\n\n\n\nNow we can see for each team that has sold in recent NFL history what teams have improved since selling. There is a clear trend that almost every team has a much steeper upward trajectory after sale. Why could this be? My speculation is owners sell the team when they lose interest. A new owner means renewed interest in the team financially and a general committment to better the team."
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
   }
 ]

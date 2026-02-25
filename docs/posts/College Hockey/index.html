@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2026-01-28">
 <meta name="description" content="Simple college hockey dashboard with game outcome prediction">
 
-<title>Hockey Game Prediction – ds334_blog</title>
+<title>Hockey Game Prediction – Data Visualization Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">ds334_blog</span>
+    <span class="navbar-title">Data Visualization Blog</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -151,12 +151,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/julianrfitz"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/julian-fitz-696321331"> <i class="bi bi-linkdin" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -181,6 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                 <div class="quarto-category">sports</div>
                 <div class="quarto-category">hockey</div>
                 <div class="quarto-category">analysis</div>
+                <div class="quarto-category">personal project</div>
               </div>
                   </div>
   </div>
@@ -224,26 +225,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># url &lt;- "https://www.uscho.com/scoreboard/division-i-women/20252026/composite-schedule/"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.uscho.com/scoreboard/division-i-men/20252026/composite-schedule/"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>home_team <span class="ot">&lt;-</span> <span class="st">"St. Lawrence University"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>away_team <span class="ot">&lt;-</span> <span class="st">"Brown University"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>away_team <span class="ot">&lt;-</span> <span class="st">"Cornell University"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="outcome-prediction" class="level1">
 <h1>Outcome Prediction</h1>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of St. Lawrence University win:  0.3411553 </code></pre>
+<pre><code>Probability of St. Lawrence University win:  0.07491079 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>St. Lawrence University Expected Goals:  2.848513 </code></pre>
+<pre><code>St. Lawrence University Expected Goals:  1.69681 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of Brown University win:  0.4971249 </code></pre>
+<pre><code>Probability of Cornell University win:  0.834772 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Brown University Expected Goals:  3.350111 </code></pre>
+<pre><code>Cornell University Expected Goals:  4.703189 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Probability of a tie:  0.1608107</code></pre>
+<pre><code>Probability of a tie:  0.08125099</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -280,15 +281,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>St.&nbsp;Lawrence University Goalies</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-b02f71426add42e0a9b3" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b02f71426add42e0a9b3">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[53,87,101],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[15,9,6],"SVPrct":[0.873,0.883,0.904],"W":[2,0,2],"L":[11,7,3],"GA":[57,37,20],"SV":[392,278,189],"SOG":[449,315,209],"TIME":[840,493,332],"GSAA":[-10.651,-4.483,1.575],"relative_save_prct":[-0.014,-0.004,0.017]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"7f35b498da2c75913e4a2dfa7ac3d980"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-de776476b054d7c24f98" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-de776476b054d7c24f98">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[53,87,101],"Name":["Mason Kucenski","Collin Winn","Cam Smith"],"Age":[23,21,23],"GP":[15,9,6],"SVPrct":[0.873,0.883,0.904],"W":[2,0,2],"L":[11,7,3],"GA":[57,37,20],"SV":[392,278,189],"SOG":[449,315,209],"TIME":[840,493,332],"GSAA":[-10.651,-4.483,1.575],"relative_save_prct":[-0.014,-0.004,0.017]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"7f35b498da2c75913e4a2dfa7ac3d980"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p><strong>Brown University Goalies</strong></p>
+<p><strong>Cornell University Goalies</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-b9fcaea3979a688f1a7a" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b9fcaea3979a688f1a7a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[46,95],"Name":["Tyler Shea","Freddie Halyk"],"Age":[24,22],"GP":[17,8],"SVPrct":[0.915,0.89],"W":[2,2],"L":[13,4],"GA":[48,23],"SV":[515,187],"SOG":[563,210],"TIME":[950,358],"GSAA":[10.117,-1.322],"relative_save_prct":[0.012,-0.013]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"7653ef62165839adb29f39f6886bf3a4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-3b1c44c26266614bb648" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3b1c44c26266614bb648">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Rk":[39,113],"Name":["Alexis Cournoyer","Remington Keopple"],"Age":[20,23],"GP":[17,4],"SVPrct":[0.923,0.9],"W":[13,3],"L":[4,1],"GA":[31,8],"SV":[374,72],"SOG":[405,80],"TIME":[1012,238],"GSAA":[10.807,0.258],"relative_save_prct":[0.012,-0.011]},"columns":[{"id":"Rk","name":"Rank","type":"numeric"},{"id":"Name","name":"Name","type":"character"},{"id":"Age","name":"Age","type":"numeric"},{"id":"GP","name":"Games Played","type":"numeric"},{"id":"SVPrct","name":"Save %","type":"numeric"},{"id":"W","name":"Wins","type":"numeric"},{"id":"L","name":"Losses","type":"numeric"},{"id":"GA","name":"Goals Allowed","type":"numeric"},{"id":"SV","name":"Saves","type":"numeric"},{"id":"SOG","name":"Shots on Goal","type":"numeric"},{"id":"TIME","name":"Time On Ice","type":"numeric"},{"id":"GSAA","name":"Goals Saved Above Average","type":"numeric"},{"id":"relative_save_prct","name":"Relative Save Percent","type":"numeric"}],"dataKey":"a84f34b900fc118cb17a0f70beef1c3a"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">

@@ -1,5 +1,5 @@
 ---
-title: "ds334_blog"
+title: "Data Visualization Blog"
 listing:
   contents: posts
   feed: true
