@@ -72,6 +72,10 @@
 </div>
 </div>
 <p>Finally, we have a heat map. This is using shots that didnt go in marked as 0, and goals marked as 1. you can see that during this game, the Canucks had most of their goals come from the goalies right side. The Avalanch goalie for the majority of this game was Mackenzie Blackwood, a goalie who wears his glove on his left hand. Targeting his stick side was clearly much more successful for the Canucks</p>
+<section id="ai-disclosure" class="level3">
+<h3 class="anchored" data-anchor-id="ai-disclosure">AI Disclosure</h3>
+<p>AI was used in debugging. The package sportyR was used to provide the hockey rink, however it initially was not working cleanly with ggplot and declaring aesthetics. Claude Sonnet 4.6 was used to help debug this, with notes added to the project to show this. AI was also used to fix a bug in the Shiny app that caused it to crash upon opening it.</p>
+</section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
