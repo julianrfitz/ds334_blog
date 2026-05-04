@@ -1,0 +1,260 @@
+---
+title: "NHL Shot Analysis"
+date: "2026-05-04"
+categories: [sports, hockey, analysis]
+---
+
+## Abstract
+
+This project explores where NHL teams generate and convert shots using data from the 2025-26 regular season. I combine play by play event data with MoneyPucks shot-locaton coordinates. After building a Shiny app to interactivly filter games, periods and events, I focus on a case study of Vancouver at Colorado on April 1, 2026 to look at how shot location and volume change over three periods. Faceted shot maps, event counts, and an offensive zone density heatmap show that Vancouver increasingly attacked the goaltenders stick side, and scored most of their goals from this area, while Colorado's shots remained more dispersed. These findings show how combining public NHL play by play data and coordinates can reveal patterns in how teams choose to shoot.
+
+## Data Description
+
+In this project, I used two primary data sources covering the 2025-26 NHL season. The first is a play by play dataset obtained through the R package nhlscraper which contains event level information about every game, including shot attempts, goals, penalties, and game context. The second data source is from Moneypuck.com and includes shot-locations through x y rink coordinates, event type, team identifiers, and period information for every recorded shot of the same season.
+
+From the play by play data, I focus on events where a shot was taken or a goal was scores, and use variables such ad gameId, isHome, period, shotType, strengthState, and rink coordinates (xCoord, yCoord). Other features are created such as attacking side, estimated angle to the net, and the distance to the net. From the Moneypuck data, I use the adjusted coordinates, event type, home/away team codes, and an indicator for if the event resulted in a goal.
+
+Both data sources index games differently. Moneypuck uses a game_id starting at 1 for each season, and the play by play data uses a gameId starting at 2025000001. Mapping these together allows the Shiny app and visualizations to filter consistantly by game and combine angle information with precise shot coordinates. 
+
+## Plots
+
+To look at these patterns across all games in the 2025-26 NHL season, I build a Shiny app that links the two data sources and lets the user pick any home and away team, select a specific game between them, and filter by period and shot result (GOAL, SHOT, MISS). For the selected settings, the app updates three views: An intercative shot map with shooting angles, a shot-density heatmap, and a bar chart of shot events by period and team.
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(here)
+library(sportyR)
+library(plotly)
+
+pbps <- readRDS(here("data/2025season.rds"))
+shots_df <- read_csv(here("data/shots_2025.csv"), show_col_types = FALSE)
+
+period_labels <- c(
+  "1" = "Period 1\nVAN 3 - COL 2",
+  "2" = "Period 2\nVAN 6 - COL 3",
+  "3" = "Period 3\nFinal: VAN 8 - COL 6"
+)
+
+avs_vs_canucks <- shots_df |>
+  filter(
+    homeTeamCode == "COL",
+    awayTeamCode == "VAN",
+    game_id == 21188,
+    period %in% c(1, 2, 3),
+    event %in% c("SHOT", "GOAL")
+  ) |>
+  mutate(
+    team_label = case_when(
+      teamCode == "COL" ~ "Colorado",
+      teamCode == "VAN" ~ "Vancouver",
+      TRUE ~ teamCode
+    ),
+    event_label = case_when(
+      event == "GOAL" ~ "Goal",
+      event == "SHOT" ~ "Shot",
+      TRUE ~ event
+    ),
+    period_lab = factor(
+      as.character(period),
+      levels = c("1", "2", "3"),
+      labels = period_labels
+    )
+  ) |>
+  filter(
+    !is.na(arenaAdjustedXCord),
+    !is.na(arenaAdjustedYCord)
+  )
+
+pbp_case_df <- pbps |>
+  filter(
+    gameId == 2025021188,                  # VAN @ COL mapping
+    !is.na(shotType),
+    period %in% c(1, 2, 3),
+    typeDescKey %in% c("shot-on-goal", "goal")
+  ) |>
+  mutate(
+    home_def_side = homeTeamDefendingSide,
+    shooting_attacks_side = case_when(
+      isHome & home_def_side == "right" ~ "left",
+      isHome & home_def_side == "left"  ~ "right",
+      !isHome & home_def_side == "right" ~ "right",
+      !isHome & home_def_side == "left" ~ "left",
+      TRUE ~ "right"
+    ),
+    net_x = if_else(shooting_attacks_side == "right", 89, -89),
+    net_y = 0,
+    dx = net_x - xCoord,
+    dy = net_y - yCoord,
+    angle_rink = atan2(dy, dx),
+    radius_rink = sqrt(dx^2 + dy^2),
+    team_label = if_else(isHome, "Colorado", "Vancouver"),
+    result_label = case_when(
+      typeDescKey == "goal" ~ "Goal",
+      TRUE ~ "Shot on goal"
+    ),
+    period_lab = factor(
+      period,
+      levels = c(1, 2, 3),
+      labels = period_labels
+    )
+  )
+
+team_colors <- c(
+  "Colorado" = "#6F263D",
+  "Vancouver" = "#00843D"
+)
+
+goal_df <- avs_vs_canucks |>
+  filter(event == "GOAL")
+```
+
+
+```{r}
+#| echo: false
+geom_hockey(league = "NHL") +
+  geom_point(
+    data = avs_vs_canucks,
+    aes(
+      x = arenaAdjustedXCord,
+      y = arenaAdjustedYCord,
+      color = team_label
+    ),
+    alpha = 0.75,
+    size = 2.8
+  ) +
+  facet_wrap(~ period_lab) +
+  scale_color_manual(values = team_colors) +
+  labs(
+    caption = "Vancouver at Colorado, Apr. 1, 2026",
+    color = "Team"
+  ) +
+  theme_void(base_size = 18) +
+  theme(
+    plot.title = element_text(face = "bold", size = 22),
+    plot.subtitle = element_text(size = 14),
+    strip.text = element_text(face = "bold", size = 15),
+    legend.position = "bottom"
+  )
+```
+
+First we have a map of all shots on goal taken by each team for each period. This plot is actually not in my Shiny app, there is instead a more detailed plotly version of it with spokes showing the shot angle. I'm quite stumped on why it was struggling to move from there to here, however I believe it was because it is based on a different data set than the other ones. The plot you see here was instead taken from my presentation. It features geom_points() to show where shots were taken, each period, and is most effective when paired with the following plot (also from my presentation) to show which of those shots went in.
+
+```{r}
+#| echo: false
+geom_hockey(league = "NHL") +
+  geom_point(
+    data = avs_vs_canucks,
+    aes(x = arenaAdjustedXCord, y = arenaAdjustedYCord),
+    color = "gray75",    
+    alpha = 0.45,
+    size = 2
+  ) +
+  geom_point(
+    data = goal_df,
+    aes(
+      x = arenaAdjustedXCord,
+      y = arenaAdjustedYCord,
+      color = team_label
+    ),
+    size = 4.5
+  ) +
+  facet_wrap(~ period_lab) +
+  scale_color_manual(values = team_colors) +
+  labs(
+    caption = "Vancouver at Colorado, Apr. 1, 2026",
+    color = "Team"
+  ) +
+  theme_void(base_size = 18) +
+  theme(
+    plot.title = element_text(face = "bold", size = 22),
+    plot.subtitle = element_text(size = 14),
+    strip.text = element_text(face = "bold", size = 15),
+    legend.position = "bottom"
+  )
+```
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+avs_vs_canucks |>
+  count(period_lab, team_label, event_label) |>
+  ggplot(aes(x = period_lab, y = n, fill = event_label)) +
+  geom_col(position = "dodge") +
+  facet_wrap(~ team_label) +
+  scale_fill_manual(values = c("Shot" = "#9ecae1", "Goal" = "#f28e2b")) +
+  labs(
+    title = "Shot and goal events by period",
+    subtitle = "Vancouver at Colorado, April 1, 2026",
+    x = NULL,
+    y = "Events",
+    fill = "Event type"
+  ) +
+  theme_minimal(base_size = 18) +
+  theme(
+    plot.title = element_text(face = "bold", size = 22),
+    plot.subtitle = element_text(size = 14),
+    strip.text = element_text(face = "bold", size = 16),
+    axis.text.x = element_text(size = 11),
+    legend.position = "bottom"
+  )
+```
+
+Next, we have this bar plot to further communicate what happened during those periods, as counting dots can be rather challenging. This helps quantify those shots, and the ones that went in.
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+van_heatmap <- shots_df |>
+  filter(
+    homeTeamCode == "COL",
+    awayTeamCode == "VAN",
+    game_id == 21188,
+    period %in% c(1, 2, 3),
+    event %in% c("SHOT", "GOAL"),
+    teamCode == "VAN",
+    !is.na(arenaAdjustedXCord),
+    !is.na(arenaAdjustedYCord)
+  )
+
+geom_hockey(league = "NHL", display_range = "ozone") +
+  stat_density_2d_filled(
+    data = van_heatmap,
+    aes(
+      x = arenaAdjustedXCord,
+      y = arenaAdjustedYCord,
+      fill = after_stat(level)
+    ),
+    contour_var = "density",
+    alpha = 0.8
+  ) +
+  coord_equal(xlim = c(25, 100), ylim = c(-42.5, 42.5)) +
+  scale_fill_viridis_d(direction = 1) +
+  labs(
+    title = "Vancouver offensive-zone shot density",
+    subtitle = "Vancouver at Colorado, April 1, 2026",
+    fill = "Density"
+  ) +
+  theme_void(base_size = 18) +
+  theme(
+    plot.title = element_text(face = "bold", size = 22),
+    plot.subtitle = element_text(size = 14),
+    legend.position = "right"
+  )
+```
+
+Finally, we have a heat map. This is using shots that didnt go in marked as 0, and goals marked as 1. you can see that during this game, the Canucks had most of their goals come from the goalies right side. The Avalanch goalie for the majority of this game was Mackenzie Blackwood, a goalie who wears his glove on his left hand. Targeting his stick side was clearly much more successful for the Canucks
+
+### AI Disclosure
+
+AI was used in debugging. The package sportyR was used to provide the hockey rink, however it initially was not working cleanly with ggplot and declaring aesthetics. Claude Sonnet 4.6 was used to help debug this, with notes added to the project to show this. AI was also used to fix a bug in the Shiny app that caused it to crash upon opening it. 
+
+## Conclusion
+
+Overall, combining play by play data with Poneypuck shot coordinates shows that Vancouvers offense in this particular game against Colorado relied heavily on generating shots from the goalies right side. Across the periods, the shot maps and bar chart show that vancouver increased both shot volume and finishing from this area as the game progressed, while colorado's attempts remained more dispersed and less efficient. The offensive zone heatmap suggests this wasn't a random pattern. The Canucks repeatedly targeted Blackwood's stick side rather than spreading shots evenly. These results are limited by the focus on a single game, and not taking into account the goalie with stats like expected goals. 
